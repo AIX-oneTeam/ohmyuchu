@@ -29,6 +29,11 @@ async def read_root():
         user["_id"] = str(user["_id"])
     return users
 
+@app.post("/user")
+async def create_user(user: dict):
+    result = await app.mongodb["user"].insert_one(user)
+    return {"_id": str(result.inserted_id)}
+    
 
 
 
