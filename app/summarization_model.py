@@ -41,7 +41,7 @@ def summarize_text(text):
         )
 
     summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
-    return " ".join(summary.split())
+    return summary  # 요약된 텍스트만 반환
 
 if __name__ == "__main__":
     # 테스트할 URL 지정
