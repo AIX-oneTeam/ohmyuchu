@@ -1,13 +1,17 @@
-from fastapi import FastAPI, HTTPException
-from data_models import User
-from typing import List
+from typing import Union
+
+from fastapi import FastAPI
 
 app = FastAPI()
-db = get_database()
 
-# 전체 유저의 정보들을 리스트로 반환
-@app.get("/users", response_model=List[User])
-async def read_users(user_id: int):
-    user = await 
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: Union[str, None] = None):
+    return {"item_id": item_id, "q": q}
 
 
