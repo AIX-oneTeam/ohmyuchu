@@ -103,7 +103,7 @@ if __name__ == "__main__":
     스크립트 실행 시 수행되는 메인 코드
     - 테스트 URL의 내용을 크롤링하고 요약
     """
-    url = "https://velog.io/@nibble/2024%EB%85%84-%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC-%EA%B7%B8%EB%A7%8C%EB%91%94-%EC%82%AC%EB%9E%8C%EC%9D%98-%ED%9A%8C%EA%B3%A0%EA%B8%80"  # 테스트 URL
+    url = "https://velog.io/@lionloopy/%EC%BD%94%EB%93%9C%EB%A7%8C-%EC%9E%98-%EC%A7%9C%EB%A9%B4-%EB%90%9C%EB%8B%A4%EA%B3%A0-%EC%8B%A0%EC%9E%85%EC%A3%BC%EB%8B%88%EC%96%B4-%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-100%EA%B0%80%EC%A7%80-%ED%95%84%EC%88%98-%EA%BF%80%ED%8C%81-1"  # 테스트 URL
 
     result = process_url(url, get_velog_content)  # URL 처리
 
