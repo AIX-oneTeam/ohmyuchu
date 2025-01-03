@@ -13,9 +13,9 @@ def get_blog_content(url):
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # 이미지 태그 제거
-        for img in soup.find_all('img'):
-            img.decompose()
+        # 원하는 class 요소 제거
+        for element in soup.find_all('div', {'class': 'se-oglink-info-container'}):
+            element.decompose()
         
         # 본문 추출
         content = soup.find('div', {'class': 'se-main-container'})
@@ -37,5 +37,5 @@ def get_blog_content(url):
         return f'오류 발생: {response.status_code}'
 
 # 사용 예시
-blog_url = 'https://blog.naver.com/motifree33/223712187313'
+blog_url = 'https://blog.naver.com/starscarsoar/223713745443'
 print(get_blog_content(blog_url))
