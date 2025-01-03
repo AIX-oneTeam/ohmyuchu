@@ -81,7 +81,7 @@ if __name__ == "__main__":
     # 테스트할 URL
     url = "https://velog.io/@nibble/2024%EB%85%84-%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC-%EA%B7%B8%EB%A7%8C%EB%91%94-%EC%82%AC%EB%9E%8C%EC%9D%98-%ED%9A%8C%EA%B3%A0%EA%B8%80"
 
-    result = process_url(url)
+    result = process_url(url, get_velog_content)
 
     if "error" in result:
         print(result["error"])
