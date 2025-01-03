@@ -3,41 +3,36 @@ from bs4 import BeautifulSoup
 import re
 import emoji
 
-def get_velog_content(url):
+def get_twitter_content(url):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
     }
     response = requests.get(url, headers=headers)
+    
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # 제목 추출
-        title = soup.find('h1')
-        title_text = title.get_text(strip=True) if title else '제목을 찾을 수 없습니다.'
+        # 트윗 내용 추출
+        tweet_content = soup.find('div', {'data-testid': 'tweetText'})
+        tweet_text = tweet_content.get_text(strip=True) if tweet_content else '트윗 내용을 찾을 수 없습니다.'
         
-        # 본문 추출
-        content = soup.find('div', {'class': 'css-175oi2r r-1s2bzr'})
-        if content:
-            text = ' '.join(content.stripped_strings)
-            cleaned_text = re.sub(r'\s+', ' ', text).strip()
-            cleaned_text = emoji.replace_emoji(cleaned_text, replace='')
-        else:
-            cleaned_text = '본문을 찾을 수 없습니다.'
+        # 사용자 이름 추출
+        user_info = soup.find('div', {'class': 'css-1jxf684 r-bcqeeo r-1ttztb7 r-qvutc0 r-poiln3'})
+        user_name = user_info.get_text(strip=True) if user_info else '사용자 정보를 찾을 수 없습니다.'
         
-        # 태그 추출
-        tags = soup.find_all('a', {'class': 'sc-dtMgUX eUxucx'})
-        tag_list = [tag.get_text(strip=True) for tag in tags] if tags else []
+        # 텍스트 클리닝 (이모지 및 공백 제거)
+        cleaned_text = re.sub(r'\s+', ' ', tweet_text).strip()
+        cleaned_text = emoji.replace_emoji(cleaned_text, replace='')
         
         return {
-            'title': title_text,
-            'content': cleaned_text,
-            'tags': tag_list
+            'user_name': user_name,
+            'content': cleaned_text
         }
     else:
         return {'error': f'오류 발생: {response.status_code}'}
 
 # 직접 실행시 테스트용
 if __name__ == "__main__":
-    velog_url = 'https://x.com/gomdol350799/status/1874704689452970254'
-    result = get_velog_content(velog_url)
+    twitter_url = 'https://x.com/gomdol350799'
+    result = get_twitter_content(twitter_url)
     print(result)
