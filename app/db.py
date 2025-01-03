@@ -11,7 +11,7 @@ class Database:
 
     @classmethod
     async def connect(cls):
-        cls.client = AsyncIOMotorClient(mongoDB_url)
+        cls.client = AsyncIOMotorClient(mongoDB_u l)
         cls.db = cls.client[database_name]
     
     
