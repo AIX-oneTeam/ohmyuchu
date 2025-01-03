@@ -1,9 +1,15 @@
 from typing import Union
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from contextlib import asynccontextmanager
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from db import Database
 
+
 db = Database()
+# 뷰 템플릿이 위치한 경로 지정
+templates = Jinja2Templates(directory="templates")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI ):
@@ -16,15 +22,13 @@ async def lifespan(app: FastAPI ):
     # await db.disconnect()
     
 app = FastAPI(lifespan=lifespan)
+# 정적 파일 경로 추가 
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
-@app.get("/")
-async def read_root():
-    users = await app.mongodb["user"].find().to_list(length=100)
-    if users is None:
-        return {"message": "No user found"}
-    for user in users:
-        user["_id"] = str(user["_id"])
-    return users
+@app.get("/", response_class=HTMLResponse)
+async def read_root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+    
 
 @app.post("/user")
 async def create_user(user: dict):
