@@ -53,7 +53,7 @@ class Summarizer:
         return summary
 
 
-def process_url(url, crawler: Callable[str, Dict]) -> Dict:
+def process_url(url, crawler: Callable):
     """URL을 받아서 크롤링과 요약을 처리하는 함수"""
     # 크롤링 실행
     result = crawler(url)
