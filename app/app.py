@@ -1,17 +1,32 @@
 from typing import Union
-
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
+from db import Database
 
-app = FastAPI()
+db = Database()
 
+@asynccontextmanager
+async def lifespan(app: FastAPI ):
+    print("Connencting DataBase")
+    await db.connect() 
+    app.mongodb = db.client["ohmyuchu"]    
+
+    yield
+    # print("Disconnecting DataBase")
+    # await db.disconnect()
+    
+app = FastAPI(lifespan=lifespan)
 
 @app.get("/")
-def read_root():
-    return {"Hello": "World"}
+async def read_root():
+    users = await app.mongodb["user"].find().to_list(length=100)
+    if users is None:
+        return {"message": "No user found"}
+    for user in users:
+        user["_id"] = str(user["_id"])
+    return users
 
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
-
-
+@app.post("/user")
+async def create_user(user: dict):
+    result = await app.mongodb["user"].insert_one(user)
+    return {"_id": str(result.inserted_id)}
