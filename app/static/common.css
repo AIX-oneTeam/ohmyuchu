@@ -1,0 +1,22 @@
+/* 던파 비트비트체 v2 */
+@font-face{
+font-family:'DNFBitBitv2';
+font-style:normal;font-weight:400;src: url('https://cdn.df.nexon.com/img/common/font/DNFBitBitv2.otf')format('opentype')}
+
+/* 강원교육튼튼체 */
+@font-face {
+    font-family: 'GangwonEduPowerExtraBoldA';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 페이퍼로지 */
+@font-face {
+    font-family: 'Paperlogy-8ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
