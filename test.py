@@ -4,9 +4,9 @@ def get_user_posts():
     try:
         # Reddit 인스턴스 생성
         reddit = praw.Reddit(
-            client_id="mCpW5hFdCqnojb9XnVVywg",
-            client_secret="5pdCX0laJzwXs5a87q8souH2lAkMxg",
-            user_agent="script:TestApp:v1.0",
+            client_id="",
+            client_secret="",
+            user_agent="",
             check_for_async=False
         )
 
