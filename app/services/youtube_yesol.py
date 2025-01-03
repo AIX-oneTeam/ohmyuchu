@@ -15,6 +15,26 @@ load_dotenv()
 API_KEY = os.getenv("YOUTUBE_API_KEY")
 MONGO_URI=os.getenv("MONGO_URI")
 MONGO_DB=os.getenv("MONGO_DB")
+
+from pymongo import MongoClient
+from dotenv import load_dotenv
+import os
+
+# MongoDB 클라이언트 생성
+client = MongoClient(MONGO_URI)
+
+# 데이터베이스 선택
+db = client[MONGO_DB]
+
+# 예제: 컬렉션 선택
+collection = db["ohmyuchu"]
+
+# 데이터 삽입 예제
+document = {"name": "John", "age": 30}
+result = collection.insert_one(document)
+print(f"Inserted ID: {result.inserted_id}")
+
+
 # YouTube API 설정
 youtube = build("youtube", "v3", developerKey=API_KEY)
 
