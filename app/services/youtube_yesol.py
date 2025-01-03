@@ -4,42 +4,81 @@ from fastapi.templating import Jinja2Templates
 
 from googleapiclient.discovery import build
 from dotenv import load_dotenv
-from pymongo import MongoClient
 
+import asyncio
+from motor.motor_asyncio import AsyncIOMotorClient
+from contextlib import asynccontextmanager
 import os
 
-### YouTube API 설정
 # .env 파일 로드
 load_dotenv()
 # 환경 변수에서 API 키 가져오기
 API_KEY = os.getenv("YOUTUBE_API_KEY")
-MONGO_URI=os.getenv("MONGO_URI")
-MONGO_DB=os.getenv("MONGO_DB")
+MONGODB_URL=os.getenv("MONGODB_URL")
+DATABASE_NAME=os.getenv("DATABASE_NAME")
 
-from pymongo import MongoClient
-from dotenv import load_dotenv
-import os
+if not MONGODB_URL or not DATABASE_NAME:
+    raise ValueError("Environment variables are missing. Check your .env file.")
 
-# MongoDB 클라이언트 생성
-client = MongoClient(MONGO_URI)
+# DB 리소스 관리 객체
+class Database:
+    # DB connection을 얻어오는 motor의 리소스
+    client: AsyncIOMotorClient = None
+    db = None
 
-# 데이터베이스 선택
-db = client[MONGO_DB]
+    @classmethod
+    async def connect(cls):
+        print(f"Connecting to MongoDB with URL: {MONGODB_URL}")
+        cls.client = AsyncIOMotorClient(MONGODB_URL)
+        if not cls.client:
+            raise ValueError("MongoDB client could not be initialized.")
+        cls.db = cls.client[DATABASE_NAME]
+        print(f"Connected to database: {DATABASE_NAME}")
+    
+    
+    @classmethod
+    async def disconnect(cls):
+        if cls.client:
+            cls.client.close()
+            print("Database connection closed")
 
-# 예제: 컬렉션 선택
-collection = db["ohmyuchu"]
+# Lifespan 핸들러 정의
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    print("Connecting to MongoDB...")
+    await Database.connect()
+    if not Database.client:
+        raise ValueError("Database client is not initialized!")
+    print("MongoDB connected")
+    yield
+    print("Disconnecting MongoDB...")
+    await Database.disconnect()
+    print("MongoDB disconnected")
 
-# 데이터 삽입 예제
-document = {"name": "John", "age": 30}
-result = collection.insert_one(document)
-print(f"Inserted ID: {result.inserted_id}")
-
+### fastAPIm jinja템플릿 설정
+app = FastAPI(lifespan=lifespan)
 
 # YouTube API 설정
 youtube = build("youtube", "v3", developerKey=API_KEY)
 
-### fastAPIm jinja템플릿 설정
-app = FastAPI()
+@app.get("/ping-db")
+async def ping_db():
+    try:
+        # MongoDB 서버에 핑 테스트
+        await Database.client.admin.command("ping")
+        return {"status": "success", "message": "MongoDB is connected!"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+@app.get("/get-all-users")
+async def get_all_users():
+    collection = Database.db["user"]  # "user" 컬렉션 접근
+    cursor = collection.find({})  # 모든 문서 조회
+    users = []
+    async for document in cursor:  # 비동기적으로 모든 문서를 반복 처리
+        document["_id"] = str(document["_id"])  # ObjectId를 문자열로 변환
+        users.append(document)
+    return {"documents": users}
 
 # 템플릿 디렉토리 설정
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # app 디렉토리
