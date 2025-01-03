@@ -1,3 +1,4 @@
+from typing import Callable, Dict 
 import torch
 from transformers import PreTrainedTokenizerFast, BartForConditionalGeneration
 from crawling_velog import get_velog_content
@@ -12,7 +13,7 @@ def preprocess_text(text):
     return text.strip()
 
 
-class VelogSummarizer:
+class Summarizer:
     def __init__(self):
         self.tokenizer = PreTrainedTokenizerFast.from_pretrained(
             "digit82/kobart-summarization"
@@ -52,10 +53,10 @@ class VelogSummarizer:
         return summary
 
 
-def process_url(url):
+def process_url(url, crawler: Callable):
     """URL을 받아서 크롤링과 요약을 처리하는 함수"""
     # 크롤링 실행
-    result = get_velog_content(url)
+    result = crawler(url)
 
     if (
         result
@@ -63,7 +64,7 @@ def process_url(url):
         and result["content"] != "본문을 찾을 수 없습니다."
     ):
         try:
-            summarizer = VelogSummarizer()
+            summarizer = Summarizer()
             summary = summarizer.summarize_text(result["content"])
             return {
                 "title": result["title"],
