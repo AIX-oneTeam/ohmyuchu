@@ -17,7 +17,7 @@ def get_twitter_content(url):
         tweet_text = tweet_content.get_text(strip=True) if tweet_content else '트윗 내용을 찾을 수 없습니다.'
         
         # 사용자 이름 추출
-        user_info = soup.find('div', {'class': 'css-1jxf684 r-bcqeeo r-1ttztb7 r-qvutc0 r-poiln3'})
+        user_info = soup.find('div', {'class': 'css-175oi2r r-1iusvr4 r-16y2uox r-ttdzmv'})
         user_name = user_info.get_text(strip=True) if user_info else '사용자 정보를 찾을 수 없습니다.'
         
         # 텍스트 클리닝 (이모지 및 공백 제거)
