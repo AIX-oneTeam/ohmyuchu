@@ -4,8 +4,9 @@
 # 2. brunch: https://brunch.co.kr
 # 3. tistory: https://tistory.com
 # 4. velog: https://velog.io
-from app import crawling_brunch, crawling_velog
-from app.summarization_model import process_url
+from crawling_brunch import get_brunch_content
+from crawling_velog import get_velog_content
+from summarization_model import process_url
 
 
 async def crawlingfromUrl(url: str):
@@ -15,14 +16,13 @@ async def crawlingfromUrl(url: str):
     crawler = None
 
     if 'brunch' in url:
-        crawler = crawling_brunch
+        crawler = get_brunch_content 
     if 'naver' in url:
         pass
     if 'tistory' in url:
         pass
     if 'velog' in url:
-        crawler = crawling_velog
+        crawler = get_velog_content
 
-    title, contents, tags = process_url(url, crawler)
-    print(title, contents, tags)
+    return process_url(url, crawler)
     

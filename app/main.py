@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from services.crawling_service import crawlingfromUrl
 from db import Database
 
 
@@ -30,8 +31,8 @@ async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
     
 
-@app.post("/user")
-async def create_user(user: dict):
-    result = await app.mongodb["user"].insert_one(user)
-    return {"_id": str(result.inserted_id)}
+@app.post("/v1/models/summarization")
+async def summarization(url: str):
+    ret = crawlingfromUrl(url)
+    print(ret)
 

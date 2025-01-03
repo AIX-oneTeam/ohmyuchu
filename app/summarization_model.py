@@ -1,3 +1,4 @@
+from typing import Callable, Dict 
 import torch
 from transformers import PreTrainedTokenizerFast, BartForConditionalGeneration
 from crawling_velog import get_velog_content
@@ -52,7 +53,7 @@ class Summarizer:
         return summary
 
 
-def process_url(url, crawler: function):
+def process_url(url, crawler: Callable[str, Dict]) -> Dict:
     """URL을 받아서 크롤링과 요약을 처리하는 함수"""
     # 크롤링 실행
     result = crawler(url)
