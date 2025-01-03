@@ -1,9 +1,10 @@
 from typing import Union
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Form, Request
 from contextlib import asynccontextmanager
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from requests import request
 from services.crawling_service import crawlingfromUrl
 from db import Database
 
@@ -31,8 +32,10 @@ async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
     
 
-@app.post("/v1/models/summarization")
-async def summarization(url: str):
+@app.post("/v1/models/summary")
+async def summarization(url: str = Form(...)):
     ret = crawlingfromUrl(url)
     print(ret)
+
+    RedirectResponse(url="/", status_code=303)
 

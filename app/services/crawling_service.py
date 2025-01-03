@@ -9,7 +9,7 @@ from crawling_velog import get_velog_content
 from summarization_model import process_url
 
 
-async def crawlingfromUrl(url: str):
+def crawlingfromUrl(url: str):
     content = None
     title = None
     tags = None
