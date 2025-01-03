@@ -1,7 +1,27 @@
+/* 던파 비트비트체 v2 */
+@font-face{
+font-family:'DNFBitBitv2';
+font-style:normal;font-weight:400;src: url('https://cdn.df.nexon.com/img/common/font/DNFBitBitv2.otf')format('opentype')}
+
+/* 강원교육튼튼체 */
+@font-face {
+    font-family: 'GangwonEduPowerExtraBoldA';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 페이퍼로지 */
+@font-face {
+    font-family: 'Paperlogy-8ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-   font-family: 'Pretendard', sans-serif;
    background-color: #D7F9A3;
    min-height: 100vh;
    display: flex;
@@ -16,6 +36,7 @@ body {
 }
 
 .logo {
+   font-family: 'DNFBitBitv2', sans-serif;
    font-weight: bold;  
    font-size: 24px;
    color: #000;
@@ -23,6 +44,7 @@ body {
 }
 
 .container {
+   font-family: 'GangwonEduPowerExtraBoldA', sans-serif;
    max-width: 800px;
    width: 100%;
    padding: 20px;
@@ -43,7 +65,7 @@ body {
 }
 
 .subtitle {
-   font-size: 20px;
+   font-size: 25px;
    text-align: center;
    margin-bottom: 40px;
    line-height: 1.5;
@@ -54,36 +76,43 @@ body {
    max-width: 500px;
    padding: 10px;
    border-radius: 25px;
-   background-color: rgba(255,255,255,0.9);
+   background-color: rgba(255, 255, 255, 0.9);
    display: flex;
    justify-content: space-between;
-   align-items: center;
-   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+   align-items: center; /* 자식 요소 수직 정렬 */
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .url-input {
+   font-family: 'Paperlogy-8ExtraBold', sans-serif;
    flex-grow: 1;
-   padding: 10px 20px;
+   height: 40px; 
+   padding: 0 20px;
    border: none;
    background: transparent;
    font-size: 16px;
+   line-height: 1; 
    outline: none;
 }
 
 .submit-button {
-   padding: 10px 20px;
+   font-family: 'Paperlogy-8ExtraBold', sans-serif;
+   height: 40px; 
+   padding: 0 20px;
    background-color: #000;
    color: white;
    border: none;
    border-radius: 20px;
    cursor: pointer;
    font-size: 16px;
+   line-height: 1;
    transition: background-color 0.3s;
 }
 
 .submit-button:hover {
    background-color: #333;
 }
+
 
 .emoji {
    position: absolute;
@@ -160,18 +189,35 @@ body {
    100% { transform: translateY(0px) rotate(45deg); }
 }
 
-@media (max-width: 768px) {
-   .main-title { font-size: 36px; }
-   .subtitle { font-size: 18px; }
-   .emoji { width: 40px; height: 40px; }
-   .input-container {
-       flex-direction: column;
-       gap: 10px;
-       padding: 15px;
-   }
-   .url-input {
-       width: 100%;
-       text-align: center;
-   }
-   .submit-button { width: 100%; }
+@media (max-width: 480px) {
+  .headset {
+    width: 150px;
+    top: 3%;
+  }
+
+  .happy-emoji {
+    width: 80px;
+  }
+
+  .sad-emoji {
+    width: 60px;
+  }
+
+  .pen {
+    width: 40px;
+  }
+
+  .book {
+    width: 80px;
+  }
+
+  .note {
+    width: 200px;
+    right: -10%;
+  }
+
+  .thunder {
+    width: 120px;
+    right: -5%;
+  }
 }
