@@ -38,9 +38,8 @@ async def read_result(request: Request):
     return templates.TemplateResponse("result.html", {"request": request})
 
 @app.post("/v1/models/summary")
-async def summarization(url: str = Form(...)):
-    ret = crawlingfromUrl(url)
-    print(ret)
+async def summarization(request: Request, url: str = Form(...)):
+    data = crawlingfromUrl(url)
 
-    return RedirectResponse(url="/result", status_code=303)
+    return templates.TemplateResponse("result.html", {"request": request, "summary": data['summary']})
 
