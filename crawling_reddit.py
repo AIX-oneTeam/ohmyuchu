@@ -3,9 +3,9 @@ import praw
 def fetch_reddit_post():
     try:
         reddit = praw.Reddit(
-        client_id="mCpW5hFdCqnojb9XnVVywg",
-        client_secret="5pdCX0laJzwXs5a87q8souH2lAkMxg",
-        user_agent="script:TestApp:v1.0",
+        client_id="",
+        client_secret="",
+        user_agent="",
         )
 
         input_url = input("사용자의 URL 을 입력하세요: ").strip()
