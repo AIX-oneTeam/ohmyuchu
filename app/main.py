@@ -27,15 +27,19 @@ app = FastAPI(lifespan=lifespan)
 # 정적 파일 경로 추가 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+# 메인 페이지
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
     
+#결과 페이지
+@app.get("/result", response_class=HTMLResponse)
+async def read_result(request: Request):
+    return templates.TemplateResponse("result.html", {"request": request})
 
 @app.post("/v1/models/summary")
-async def summarization(url: str = Form(...)):
-    ret = crawlingfromUrl(url)
-    print(ret)
+async def summarization(request: Request, url: str = Form(...)):
+    data = crawlingfromUrl(url)
 
-    RedirectResponse(url="/", status_code=303)
+    return templates.TemplateResponse("result.html", {"request": request, "summary": data['summary']})
 
