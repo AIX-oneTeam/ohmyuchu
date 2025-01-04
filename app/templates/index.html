@@ -6,14 +6,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--브라우저가 문서를해석할때 한글을 UTF-8형식으로 해석-->
+
     <title>OHMYUCHOO</title>
-    <link rel="stylesheet" href="/static/style_index.css" />
+    <link rel="stylesheet" href="../static/style_index.css" />
     <!-- for live server-->
     <!-- <link rel="stylesheet" href="../static/style_index.css" /> -->
   </head>
   <body>
     <header class="header_white">
       <div class="logo_white">OHMYUCHOO</div>
+      <div class="login-btn">
+        <a href="/auth/kakao/login">
+          <img
+            src="../static/assets/kakao_login_medium.png"
+            alt="kakao-login-btn"
+          />
+        </a>
+        <button class="logout">로그아웃</button>
+      </div>
     </header>
     <main class="container">
       <h1 class="main-title">오늘의 뮤직 추천!</h1>
@@ -65,5 +75,42 @@
         <p>2025. All rights reserved.</p>
       </div>
     </footer>
+
+    <script>
+      // 로그인 상태 관리
+      function checkLoginStatus() {
+        const token = localStorage.getItem("kakaoToken");
+        return !!token;
+      }
+
+      // 로그인 버튼 업데이트
+      function updateLoginUI() {
+        const isLoggedIn = checkLoginStatus();
+        const loginBtn = document.querySelector(".login-btn a");
+        const logoutBtn = document.querySelector(".logout");
+
+        if (isLoggedIn) { // true
+          loginBtn.style.display = "none"; // 숨김
+          logoutBtn.style.display = "block"; // 표시
+        } else { // false
+          loginBtn.style.display = "block";
+          logoutBtn.style.display = "none";
+        }
+      }
+
+      // 로그아웃 처리
+      function handleLogout() {
+        localStorage.removeItem("kakaoToken");
+        updateLoginUI();
+      }
+
+      // 초기화
+      document.addEventListener("DOMContentLoaded", () => {
+        updateLoginUI();
+        // 로그아웃 버튼 이벤트 리스너
+        const logoutBtn = document.querySelector(".logout");
+        logoutBtn.addEventListener("click", handleLogout);
+      });
+    </script>
   </body>
 </html>
