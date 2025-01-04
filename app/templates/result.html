@@ -4,9 +4,12 @@
   <!-- 한국어문서, 음성지원할때 -->
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--브라우저가 문서를해석할때 한글을 UTF-8형식으로 해석-->
     <title>OHMYUCHOO</title>
-    <link rel="stylesheet" href="/static/style_result.css" />
+    <!-- <link rel="stylesheet" href="/static/style_result.css" /> -->
+    <!-- for live server -->
+    <link rel="stylesheet" href="../static/style_result.css" />
   </head>
   <body>
     <header class="header_green">
@@ -17,7 +20,7 @@
     <section class="ret_text_container">
       <div class="ret_text_summary">
         <h2 class="ret_text_summary--header">아티클 요약</h2>
-        <p class="ret_text_summary--bold">{{ summary }}</p>
+        <p class="ret_text_summary--bold">"{{ summary }}"</p>
       </div>
 
       <div class="ret_text_emotion">
@@ -31,7 +34,7 @@
           </ul>
           가 느껴지네요.
         </p>
-        <p>{{commment}}예시 코멘트</p>
+        <p>{{commment}}</p>
         
       </div>
     </section>
@@ -56,14 +59,13 @@
         </ul>
     </section>
 
-    <section>
-      <div>
-        <a href="/" class="btn">다시 분석하기</a>
-      </div>
-    </section>
+    
 
     </main>
     <footer class="footer_green">
+    <div class="footer_btn_container">
+      <a href="/" class="btn return">다시 분석하기</a>
+    </div>
       <div class="footer_green--text">
         <p>OHMYUCHOO</p>
         <p>2025. All rights reserved.</p>
