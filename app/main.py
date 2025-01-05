@@ -1,4 +1,5 @@
 from typing import Union
+from services.emotion_service import analyze_emotion 
 from fastapi import FastAPI, Form, Request
 from contextlib import asynccontextmanager
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -45,7 +46,12 @@ async def read_result(request: Request):
 
 @app.post("/v1/models/summary")
 async def summarization(request: Request, url: str = Form(...)):
-    data = crawlingfromUrl(url)
+    summary = crawlingfromUrl(url)
+    emotion = analyze_emotion(summary['summary'])
+    data = {
+        "summary": summary['summary'],
+        "emotion": emotion
+    }
 
-    return templates.TemplateResponse("result.html", {"request": request, "summary": data['summary']})
+    return templates.TemplateResponse("result.html", {"request": request, "data": data})
 
