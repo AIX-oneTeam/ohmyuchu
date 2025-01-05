@@ -28,9 +28,7 @@
         <p class="ret_text_emotion--plane">
           당신의 글에선 
           <ul>
-          {% for emotion in emotions %} 
           <li class="ret_text_emotion--bold">{{ emotion }}예시 감정</li>
-          {% endfor %}
           </ul>
           가 느껴지네요.
         </p>
@@ -40,8 +38,8 @@
     </section>
       <div class="button_container">
         <button class="btn">공유</button>
-        <button class="btn blue" onclick="likeSong('OMG')">좋아요</button>
-        <button class="btn red" onclick="dislikeSong('OMG')">싫어요</button>
+        <button class="btn blue" onclick="likeSong('song.title')">좋아요</button>
+        <button class="btn red" onclick="dislikeSong('song.title')">싫어요</button>
       </div>
       
 
@@ -50,10 +48,10 @@
         <h2 class="ret_music_summary--header">AI가 선정한 추천 음악</h2>
         <ul class="ret_music_choose">
           <li class="ret_music_choose--img">
-            <iframe width="633" height="524" src={{src}} frameborder="0" allowfullscreen></iframe>
+            <iframe width="633" height="524" src="{{song.src}}" frameborder="0" allowfullscreen></iframe>
             <div class="ret_music_choose--info">
-              <p class="ret_music_choose--info--bold">{{ title }}</p>
-              <p class="ret_music_choose--info--plain">{{ artist }}</p>
+              <p class="ret_music_choose--info--bold">{{ song.title }}</p>
+              <p class="ret_music_choose--info--plain">{{ song.artist }}</p>
             </div>
           </li>
         </ul>
