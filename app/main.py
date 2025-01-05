@@ -50,12 +50,18 @@ async def read_result(request: Request):
 async def summarization(request: Request, url: str = Form(...)):
     songs_collection = Database.db['songs']  
     analysis_collection = Database.db['analysis']
+    comment_collection = Database.db['comments']
+
     summary = crawlingfromUrl(url)
     emotion = analyze_emotion(summary['summary'])
+
     music = await get_song_data(emotion, songs_collection, analysis_collection)
+    comment = await comment_collection.find_one({"emotion": emotion})
+    print("comment", comment)
     data = {
         "summary": summary['summary'],
         "emotion": emotion,
+        "comment": comment['comment'],
         "music":{
             "title": music['title'],
             "artist": music['artist'],

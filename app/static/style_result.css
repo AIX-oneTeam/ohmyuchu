@@ -55,7 +55,7 @@ li{
    font-family: 'DNFBitBitv2', sans-serif;
    font-weight: bold;  
    font-size: 24px;
-   color: #ffffff;
+   color: #000000;
    padding-left: 20px;
 }
 
@@ -75,6 +75,9 @@ li{
     border-radius: 25px;
     margin-bottom: 30px;
     text-align: center; 
+    display: flex;
+    flex-direction: column;
+    gap:20px;
 }
 
 .ret_text_summary{
@@ -113,8 +116,30 @@ li{
     padding: 100px 0;
     display: flex;
     flex-direction: row;
-    justify-content:left;
+    justify-content:center;
+    align-items: center;
     position: relative;
+}
+
+.ret_music_summary{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.ret_music_choose{
+    width: 100%;
+}
+
+.ret_music_choose--item{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    gap: 20px;
 }
 
 .ret_music_choose{
@@ -150,4 +175,8 @@ li{
     bottom: 70px;
 }
 
+.iframe-container{
+    position: relative;
+    width: 100%;
+}
 

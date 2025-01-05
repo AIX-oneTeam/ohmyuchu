@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--브라우저가 문서를해석할때 한글을 UTF-8형식으로 해석-->
 
-    <title>OHMYUCHOO</title>
+    <title>OHMUCHOO</title>
     <link rel="stylesheet" href="../static/style_index.css" />
     <!-- for live server-->
     <!-- <link rel="stylesheet" href="../static/style_index.css" /> -->
   </head>
   <body>
     <header class="header_white">
-      <div class="logo_white">OHMYUCHOO</div>
+      <div class="logo_white">OHMUCHOO</div>
       <div class="login-btn">
         <a href="/auth/kakao/login">
           <img
@@ -69,7 +69,7 @@
       />
 
       <div class="sites">
-        <p>ohmyuchoo가 지원하는 사이트</p>
+        <p>ohmuchoo가 지원하는 사이트</p>
         <ul class="site-list">
           <li>NaverBlog</li>
           <li>Velog</li>
@@ -82,7 +82,7 @@
 
     <footer class="footer_green">
       <div class="footer_green--text">
-        <p>OHMYUCHOO</p>
+        <p>OHMUCHOO</p>
         <p>2025. All rights reserved.</p>
       </div>
     </footer>
@@ -100,10 +100,12 @@
         const loginBtn = document.querySelector(".login-btn a");
         const logoutBtn = document.querySelector(".logout");
 
-        if (isLoggedIn) { // true
+        if (isLoggedIn) {
+          // true
           loginBtn.style.display = "none"; // 숨김
           logoutBtn.style.display = "block"; // 표시
-        } else { // false
+        } else {
+          // false
           loginBtn.style.display = "block";
           logoutBtn.style.display = "none";
         }

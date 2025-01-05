@@ -6,14 +6,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--브라우저가 문서를해석할때 한글을 UTF-8형식으로 해석-->
-    <title>OHMYUCHOO</title>
+    <title>OHMUCHOO</title>
     <link rel="stylesheet" href="/static/style_result.css" />
     <!-- for live server -->
     <!-- <link rel="stylesheet" href="../static/style_result.css" /> -->
   </head>
   <body>
     <header class="header_green">
-      <div class="logo_green">OHMYUCHOO</div>
+      <div class="logo_green">OHMUCHOO</div>
     </header>
 
     <main class="ret_container">
@@ -30,7 +30,7 @@
           <span class="ret_text_emotion--bold">{{ data.emotion }}</span>
           (이)가 느껴지네요.
         </p>
-        <p>{{commment}}</p>
+        <p>{{data.comment}}</p>
         
       </div>
     </section>
@@ -45,10 +45,9 @@
       <div class="ret_music_summary">
         <h2 class="ret_music_summary--header">AI가 선정한 추천 음악</h2>
         <ul class="ret_music_choose">
-          <li class="ret_music_choose--img">
-              <li>
-                <h2>{{ data.music.title }}</h2>
-                <iframe
+          <li class="ret_music_choose--item">
+            <h2>{{ data.music.title }}</h2>
+              <iframe class="iframe-container"
                     width="633"
                     height="524"
                     src="{{ data.music.src }}"
@@ -61,7 +60,6 @@
               <p class="ret_music_choose--info--bold">{{ data.music.title }}</p>
               <p class="ret_music_choose--info--plain">{{ data.music.artist }}</p>
             </div>
-            </li>            
           </li>
         </ul>
     </section>
@@ -74,7 +72,7 @@
       <a href="/" class="btn return">다시 분석하기</a>
     </div>
       <div class="footer_green--text">
-        <p>OHMYUCHOO</p>
+        <p>OHMUCHOO</p>
         <p>2025. All rights reserved.</p>
       </div>
     </footer>
