@@ -10,12 +10,11 @@ from services.crawling_service import crawlingfromUrl
 from services.music_service import get_song_data
 from db import Database
 
+
 # FastAPI의 APIRouter를 kakao_controller.py에 import하여 router 객체 생성
 from kakao_controller import router as kakao_router
 
 db = Database()
-songs_collection = db['songs']  
-analysis_collection = db['analysis']
 # 뷰 템플릿이 위치한 경로 지정
 templates = Jinja2Templates(directory="templates")
 
@@ -23,7 +22,7 @@ templates = Jinja2Templates(directory="templates")
 async def lifespan(app: FastAPI ):
     print("Connencting DataBase")
     await db.connect() 
-    app.mongodb = db.client["ohmyuchu"]    
+    app.mongodb = db.client["test"]    
 
     yield
     # print("Disconnecting DataBase")
@@ -49,9 +48,11 @@ async def read_result(request: Request):
 
 @app.post("/v1/models/summary")
 async def summarization(request: Request, url: str = Form(...)):
+    songs_collection = Database.db['songs']  
+    analysis_collection = Database.db['analysis']
     summary = crawlingfromUrl(url)
     emotion = analyze_emotion(summary['summary'])
-    music = get_song_data(emotion)
+    music = await get_song_data(emotion, songs_collection, analysis_collection)
     data = {
         "summary": summary['summary'],
         "emotion": emotion,
@@ -66,6 +67,9 @@ async def summarization(request: Request, url: str = Form(...)):
 
 @app.post("/like")
 async def increase_like(data: dict = Body(...)):
+    songs_collection = Database.db['songs']  
+    analysis_collection = Database.db['analysis']
+
     print(f"Received data: {data}")  # 요청 데이터 확인
     title = data.get("title")
     if not title:
@@ -83,6 +87,8 @@ async def increase_like(data: dict = Body(...)):
 
 @app.post("/dislike")
 async def decrease_dislike(data: dict = Body(...)):
+    songs_collection = Database.db['songs']  
+    analysis_collection = Database.db['analysis']
     print(f"Received data: {data}")  # 요청 데이터 확인
     title = data.get("title")
     if not title:
