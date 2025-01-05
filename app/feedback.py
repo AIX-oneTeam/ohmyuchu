@@ -18,8 +18,9 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # MongoDB 연결
-mongoDB_url: str = "mongodb+srv://yesol:yesol9639@test.9r2s8.mongodb.net/"
-database_name: str = "test"
+mongoDB_url: str = "mongodb://192.168.0.141:27017"
+database_name: str = "ohmyuchu"
+
 client = MongoClient(mongoDB_url)
 db = client[database_name]  # 데이터베이스 이름
 songs_collection = db['songs']  # 컬렉션 이름

@@ -2,10 +2,8 @@ from pymongo import MongoClient
 from datetime import datetime
 
 # MongoDB 연결 설정
-mongoDB_url: str = "mongodb+srv://yesol:yesol9639@test.9r2s8.mongodb.net/"
-database_name: str = "test"
-# mongoDB_url: str = "mongodb://192.168.0.141:27017"
-# database_name: str = "ohmyuchu"
+mongoDB_url: str = "mongodb://192.168.0.141:27017"
+database_name: str = "ohmyuchu"
 
 client = MongoClient(mongoDB_url)  # MongoDB URI로 교체
 db = client[database_name]  # 데이터베이스 이름
