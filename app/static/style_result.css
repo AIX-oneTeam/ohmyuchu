@@ -4,6 +4,10 @@ a{
     text-decoration: none;
 }
 
+li{
+    list-style-type: none;
+}
+
 .header_green{
    padding: 20px;
    width: 100%;
@@ -111,6 +115,12 @@ a{
     flex-direction: row;
     justify-content:left;
     position: relative;
+}
+
+.ret_music_choose{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .button_container{

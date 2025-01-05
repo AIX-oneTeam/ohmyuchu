@@ -50,11 +50,29 @@
         <h2 class="ret_music_summary--header">AI가 선정한 추천 음악</h2>
         <ul class="ret_music_choose">
           <li class="ret_music_choose--img">
-            <img src="{{ album_img }}" alt="음악 앨범 이미지" />
-            <div class="ret_music_choose--info">
+            {% if videos %}
+              {% for video in videos %}
+              <li>
+                <h2>{{ video.title }}</h2>
+                <iframe
+                    width="633"
+                    height="524"
+                    src="https://www.youtube.com/embed/{{ video.id }}"
+                    title="{{ video.title }}"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+              <div class="ret_music_choose--info">
               <p class="ret_music_choose--info--bold">{{ title }}</p>
               <p class="ret_music_choose--info--plain">{{ artist }}</p>
             </div>
+            </li>
+             {% endfor %}
+            {% else %}
+            <p>어울리는 노래가 없어요</p>
+            {% endif %}
+            
           </li>
         </ul>
     </section>
