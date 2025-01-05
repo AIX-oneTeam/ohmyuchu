@@ -20,19 +20,15 @@
     <section class="ret_text_container">
       <div class="ret_text_summary">
         <h2 class="ret_text_summary--header">아티클 요약</h2>
-        <p class="ret_text_summary--bold">"{{ summary }}"</p>
+        <p class="ret_text_summary--bold">"{{ data.summary }}"</p>
       </div>
 
       <div class="ret_text_emotion">
         <h2 class="ret_text_emotion--header">글에서 느껴지는 주요 감정</h2>
         <p class="ret_text_emotion--plane">
           당신의 글에선 
-          <ul>
-          {% for emotion in emotions %} 
-          <li class="ret_text_emotion--bold">{{ emotion }}예시 감정</li>
-          {% endfor %}
-          </ul>
-          가 느껴지네요.
+          <span class="ret_text_emotion--bold">{{ data.emotion }}</span>
+          (이)가 느껴지네요.
         </p>
         <p>{{commment}}</p>
         
