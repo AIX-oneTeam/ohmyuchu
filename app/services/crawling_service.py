@@ -7,6 +7,7 @@
 from crawling_brunch import get_brunch_content
 from crawling_velog import get_velog_content
 from summarization_model import process_url
+from crawling_tistory import get_tistory_content
 
 
 def crawlingfromUrl(url: str):
@@ -20,7 +21,7 @@ def crawlingfromUrl(url: str):
     if 'naver' in url:
         pass
     if 'tistory' in url:
-        pass
+        crawler = get_tistory_content
     if 'velog' in url:
         crawler = get_velog_content
 
