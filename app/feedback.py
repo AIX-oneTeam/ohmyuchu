@@ -18,13 +18,22 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # MongoDB 연결
-mongoDB_url: str = "mongodb://192.168.0.141:27017"
-database_name: str = "ohmyuchu"
+mongoDB_url: str = "mongodb+srv://ohmyuchu:ohmyuchu1111@test.9r2s8.mongodb.net/"
+database_name: str = "test"
 
 client = MongoClient(mongoDB_url)
 db = client[database_name]  # 데이터베이스 이름
 songs_collection = db['songs']  # 컬렉션 이름
 analysis_collection =  db['analysis']
+
+# emotion = "기쁨"
+# random_song = songs_collection.aggregate([
+#     {"$match": {"emotion": emotion}},  # 감정에 맞는 노래만 필터링
+#     {"$sample": {"size": 1}}  # 랜덤으로 1개의 노래 선택
+# ])
+
+# song = list(random_song)
+# song[0]['title']
 
 @app.get("/song/")
 def get_song_data(request:Request, emotion:str) :
