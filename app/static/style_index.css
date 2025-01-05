@@ -1,0 +1,280 @@
+@import url("common.css");
+
+body {
+  background-color: #d7f9a3;
+}
+
+.header_white {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  width: 100vw;
+  height: 85px;
+  background-color: #fff;
+}
+
+.logo_white {
+  font-family: "DNFBitBitv2", sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  color: #000;
+}
+
+.login-btn {
+   display: flex;
+   align-items: center;
+ }
+ 
+ .login-btn a {
+   text-decoration: none;
+ }
+ 
+ .login-btn img {
+   width: 90px;
+   height: 45px;
+   cursor: pointer;
+ }
+
+/* 로그아웃 버튼 */
+.logout {
+  font-family: "GangwonEduPowerExtraBoldA", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  color: #000;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  padding: 10px 20px 0px 0px;
+}
+
+.container {
+  font-family: "GangwonEduPowerExtraBoldA", sans-serif;
+  width: 100%;
+  padding: 20px;
+  margin-top: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-title {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+.input-container {
+  width: 100%;
+  max-width: 1048px;
+  padding: 10px;
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.url-input {
+  font-family: "Paperlogy-8ExtraBold", sans-serif;
+  flex-grow: 1;
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  line-height: 1;
+  outline: none;
+}
+
+.submit-button {
+  font-family: "Paperlogy-8ExtraBold", sans-serif;
+  height: 40px;
+  padding: 0 20px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #333;
+}
+
+.emoji {
+  position: absolute;
+  z-index: -1;
+}
+
+.headset {
+  width: 350px;
+  height: auto;
+  top: 9%;
+  left: 1%;
+  animation: float 3s ease-in-out infinite;
+}
+
+.happy-emoji {
+  width: 190px;
+  height: auto;
+  bottom: 4%;
+  left: 5%;
+  animation: float 4s ease-in-out infinite;
+}
+
+.sad-emoji {
+  width: 120px;
+  height: auto;
+  bottom: 27%;
+  left: 5%;
+  animation: float 3.5s ease-in-out infinite;
+}
+
+.pen {
+  width: 100px;
+  height: auto;
+  bottom: 25%;
+  left: 10%;
+  animation: float 3.5s ease-in-out infinite;
+}
+
+.book {
+  position: absolute;
+  width: 300px;
+  height: auto;
+  top: 25%;
+  right: 2%;
+  animation: float 3.5s ease-in-out infinite;
+}
+
+.note {
+  position: absolute;
+  width: 450px;
+  height: auto;
+  bottom: 0%;
+  right: 10%;
+  animation: float 3.5s ease-in-out infinite;
+}
+
+.thunder {
+  position: absolute;
+  width: 250px;
+  height: auto;
+  bottom: 25%;
+  right: 10%;
+  animation: float 3.5s ease-in-out infinite;
+}
+
+.footer_green {
+  font-family: "DNFBitBitv2", sans-serif;
+  font-size: 10px;
+  color: #000000;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding: 5px 20px;
+  background-color: #d7f9a3;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes floatBook {
+  0% {
+    transform: translateY(0px) rotate(45deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(45deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(45deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .headset {
+    width: 200px;
+  }
+
+  .happy-emoji {
+    width: 150px;
+  }
+
+  .sad-emoji {
+    width: 150px;
+    top: 50%;
+  }
+
+  .pen {
+    width: 80px;
+  }
+
+  .book {
+    width: 150px;
+  }
+
+  .note {
+    width: 200px;
+    bottom: 10%;
+  }
+
+  .thunder {
+    width: 150px;
+  }
+
+  .main-title {
+    font-size: 40px;
+  }
+  .subtitle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .submit-button {
+    font-size: 12px;
+    white-space: nowrap;
+    transform: translateX(-30px);
+  }
+
+  .subtitle {
+    padding: 20px;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+}
+@media (max-width: 376px) {
+  .submit-button {
+    font-size: 12px;
+    white-space: nowrap;
+    transform: translateX(-40px);
+  }
+}
