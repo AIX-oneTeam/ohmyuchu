@@ -1,13 +1,8 @@
 import random
-from pymongo import MongoClient
+from services.load_data_db import db
 
-# MongoDB 연결 설정
-mongoDB_url: str = "mongodb+srv://ohmyuchu:ohmyuchu1111@test.9r2s8.mongodb.net/"
-database_name: str = "test"
-
-client = MongoClient(mongoDB_url)
-db = client[database_name]
-comment_collection = db['comment']  # 'comment' 컬렉션
+# 'comment' 컬렉션 가져오기
+comment_collection = db['comment']
 
 def get_comment(emotion: str) -> str:
     """
