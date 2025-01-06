@@ -47,7 +47,6 @@ async def read_root(request: Request):
 @app.post("/v1/models/summary")
 async def summarization(request: Request, url: str = Form(...)):
     songs_collection = Database.db['songs']
-    analysis_collection = Database.db['analysis']
     comment_collection = Database.db['comment']
 
     # 1) 크롤링 시도
@@ -76,7 +75,7 @@ async def summarization(request: Request, url: str = Form(...)):
 
     # 2) 정상적으로 수집된 경우 처리
     emotion = analyze_emotion(main_summary)
-    music = await get_song_data(emotion, songs_collection, analysis_collection)
+    music = await get_song_data(emotion, songs_collection)
     #감정에 따른 랜덤 코멘트 가져오기
     comment = await get_comment(emotion, comment_collection )
 
@@ -95,7 +94,6 @@ async def summarization(request: Request, url: str = Form(...)):
 @app.post("/like")
 async def increase_like(data: dict = Body(...)):
     songs_collection = Database.db['songs']  
-    analysis_collection = Database.db['analysis']
 
     print(f"Received data: {data}")  # 요청 데이터 확인
     title = data.get("title")
@@ -114,8 +112,8 @@ async def increase_like(data: dict = Body(...)):
 
 @app.post("/dislike")
 async def decrease_dislike(data: dict = Body(...)):
-    songs_collection = Database.db['songs']  
-    analysis_collection = Database.db['analysis']
+    songs_collection = Database.db['songs'] 
+     
     print(f"Received data: {data}")  # 요청 데이터 확인
     title = data.get("title")
     if not title:
