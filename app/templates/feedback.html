@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+  <!-- 한국어문서, 음성지원할때 -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--브라우저가 문서를해석할때 한글을 UTF-8형식으로 해석-->
+    <title>OHMYUCHOO</title>
+    <link rel="stylesheet" href="/static/style_result.css" />
+    <!-- for live server -->
+    <!-- <link rel="stylesheet" href="../static/style_result.css" /> -->
+  </head>
+  <body>
+    <header class="header_green">
+      <div class="logo_green">OHMYUCHOO</div>
+    </header>
+
+    <main class="ret_container">
+    <section class="ret_text_container">
+      <div class="ret_text_summary">
+        <h2 class="ret_text_summary--header">아티클 요약</h2>
+        <p class="ret_text_summary--bold">"{{ summary }}"</p>
+      </div>
+
+      <div class="ret_text_emotion">
+        <h2 class="ret_text_emotion--header">글에서 느껴지는 주요 감정</h2>
+        <p class="ret_text_emotion--plane">
+          당신의 글에선 
+          <ul>
+          <li class="ret_text_emotion--bold">{{ emotion }}예시 감정</li>
+          </ul>
+          가 느껴지네요.
+        </p>
+        <p>{{commment}}</p>
+        
+      </div>
+    </section>
+      <div class="button_container">
+        <button class="btn">공유</button>
+        <button class="btn blue" onclick="likeSong('song.title')">좋아요</button>
+        <button class="btn red" onclick="dislikeSong('song.title')">싫어요</button>
+      </div>
+      
+
+    <section class="ret_music_container">
+      <div class="ret_music_summary">
+        <h2 class="ret_music_summary--header">AI가 선정한 추천 음악</h2>
+        <ul class="ret_music_choose">
+          <li class="ret_music_choose--img">
+            <iframe width="633" height="524" src="{{song.src}}" frameborder="0" allowfullscreen></iframe>
+            <div class="ret_music_choose--info">
+              <p class="ret_music_choose--info--bold">{{ song.title }}</p>
+              <p class="ret_music_choose--info--plain">{{ song.artist }}</p>
+            </div>
+          </li>
+        </ul>
+    </section>
+
+
+    </main>
+    <footer class="footer_green">
+    <div class="footer_btn_container">
+      <a href="/" class="btn return">다시 분석하기</a>
+    </div>
+      <div class="footer_green--text">
+        <p>OHMYUCHOO</p>
+        <p>2025. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+        async function likeSong(title) {
+          try {
+            const response = await fetch('http://127.0.0.1:8000/like', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ title: title })
+            });
+            if (response.ok) {
+              alert('좋아요가 반영되었습니다!');
+            } else {
+              const error = await response.json();
+              alert(`에러 발생: ${error.detail}`);
+            }
+          } catch (err) {
+            console.error('요청 실패:', err);
+            alert('서버와의 통신 중 오류가 발생했습니다.');
+          }
+        }
+  
+        async function dislikeSong(title) {
+          try {
+            const response = await fetch('http://127.0.0.1:8000/dislike', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ title: title })
+            });
+            if (response.ok) {
+              alert('싫어요가 반영되었습니다!');
+            } else {
+              const error = await response.json();
+              alert(`에러 발생: ${error.detail}`);
+            }
+          } catch (err) {
+            console.error('요청 실패:', err);
+            alert('서버와의 통신 중 오류가 발생했습니다.');
+          }
+        }
+      </script>
+
+  </body>
+
+</html>
+
