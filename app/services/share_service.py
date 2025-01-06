@@ -5,6 +5,10 @@ from PIL import Image
 import base64
 import io
 
+#---------------------------------------------------------
+#                       deprecated
+#---------------------------------------------------------
+
 async def capture_page():
     """
     특정 URL의 특정 요소를 캡처하고 Base64로 반환
