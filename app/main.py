@@ -77,7 +77,7 @@ async def summarization(request: Request, url: str = Form(...)):
     emotion = analyze_emotion(main_summary)
     music = await get_song_data(emotion, songs_collection, analysis_collection)
     #감정에 따른 랜덤 코멘트 가져오기
-    comment = get_comment(emotion)
+    comment = await get_comment(emotion, comment_collection )
 
     data = {
         "summary": main_summary,
