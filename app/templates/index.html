@@ -37,11 +37,10 @@
         <p>어울리는 음악을 추천해드려요!</p>
         <p class="subtitle--url">URL을 알려주세요!</p>
       </div>
-    
       <form class="input-container" method="POST" action="v1/models/summary" id="urlForm">
         <input type="text" placeholder="URL을 입력해주세요." class="url-input" name="url" />
         <!-- type="submit" -->
-        <button class="submit-button" onClick="loadingShow(event)">결과 보기</button>
+        <button class="submit-button" onClick="loadingShow(event); counting()">결과 보기</button>
       </form>
 
       <img
@@ -73,10 +72,22 @@
         <ul class="site-list">
           <li>NaverBlog</li>
           <li>Velog</li>
+          <li>Brunch</li>
           <li>Tistory</li>
           <li>X(twitter)</li>
           <li>reddit</li>
         </ul>
+      </div>
+
+      <div class="counting">
+        <p>
+          총
+          <span class="blue">{{count_data.total_count}}</span>명이 이용했어요!
+        </p>
+        <p>
+          오늘은 총
+          <span class="red">{{count_data.today_count}}</span>명이 이용했어요!
+        </p>
       </div>
     </main>
 
@@ -86,6 +97,36 @@
         <p>2025. All rights reserved.</p>
       </div>
     </footer>
+
+    <script>
+      const counting = async () => {
+        let userInfo = {
+          email: "anonymous",
+          nickname: "anonymous",
+        };
+        kakaoToken = null;
+        //로그인 되어있을 경우 정보를 userInfo에 저장
+        if (checkLoginStatus()) {
+          kakaoToken = localStorage.getItem("kakaoToken");
+          userInfo = {
+            email: kakaoToken.email,
+            nickname: kakaoToken.nickname,
+          };
+        }
+
+        console.log(userInfo);
+
+        try {
+          const response = await fetch("http://127.0.0.1:8000/addCount", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userInfo: userInfo }),
+          });
+        } catch (err) {
+          console.error("요청 실패:", err);
+        }
+      };
+    </script>
 
     <script>
       // 로그인 상태 관리
