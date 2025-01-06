@@ -229,6 +229,24 @@ li{
       gap:10px;
 }
 
+.counting{
+  font-size: 18px;
+  padding: 24px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blue{
+    font-size:24px;
+    color: #E26928;
+}
+
+.red{
+    font-size:24px;
+    color: #F5B227;
+}
+
 @keyframes float {
   0% {
     transform: translateY(0px);
@@ -305,11 +323,13 @@ li{
       background-color: rgba(255, 255, 255, 0.7);
    }
 
-   .sites > p{
+   
+}
+@media (max-width: 600px){
+  .sites > p{
       font-size: 20px;
    }
    
-
    .site-list{
       font-size: 16px;
       display: flex;

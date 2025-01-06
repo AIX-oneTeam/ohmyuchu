@@ -1,5 +1,5 @@
 from typing import Union
-from services.day_count_service import save_day_count
+from services.day_count_service import print_day_count, save_day_count
 from services.emotion_service import analyze_emotion 
 from fastapi import FastAPI, Form, Request, HTTPException, Body
 from contextlib import asynccontextmanager
@@ -41,7 +41,8 @@ app.include_router(kakao_router, prefix="/auth/kakao")
 # 메인 페이지
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    count_data = await print_day_count()
+    return templates.TemplateResponse("index.html", {"request": request, "count_data": count_data})
 
 @app.post("/v1/models/summary")
 async def summarization(request: Request, url: str = Form(...)):

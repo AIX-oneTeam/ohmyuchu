@@ -2,18 +2,23 @@ from datetime import datetime, timezone
 from db import Database
 
 
-def print_day_count():
+async def print_day_count():
     collection_histroy = Database.db['history']
-    total_count = collection_histroy.count_documents({})
-    aonymous_count = collection_histroy.count_documents({"email": "anonymous"})
-    user_count = total_count - aonymous_count
 
-    return {
+    # 하루 기준 집계
+    today = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+    today_count = await collection_histroy.count_documents({"timestamp": {"$gte": today}})
+    total_count = await collection_histroy.count_documents({})
+    anonymous_count = await collection_histroy.count_documents({"email": "anonymous"})
+
+    if(total_count and anonymous_count):
+        user_count = total_count - anonymous_count
+        return {
         "total_count": total_count,
         "user_count": user_count,
-        "anonymous_count": aonymous_count
-    }
-
+        "anonymous_count": anonymous_count,
+        "today_count": today_count
+        }
 
 def save_day_count(userInfo: dict):
     collection_histroy = Database.db['history']
