@@ -1,27 +1,35 @@
-# comment_service.py
+import random
+from pymongo import MongoClient
 
-# 감정별 코멘트를 관리하는 딕셔너리
-comment_to_emotion = {
-    "오늘은 기쁜 하루를 보내셨군요! 이런 날들이 계속해서 많아지길 바랄게요. 내일도 활짝 웃는 하루가 되길 응원합니다!": "기쁨",
-    "오늘은 슬픈 하루를 보내셨군요. 괜찮습니다, 누구에게나 이런 날이 있기 마련이에요. 잠시 쉬면서 마음을 다독여보세요. 곧 행복이 다시 찾아올 거예요!": "슬픔",
-    "오늘은 많이 놀란 하루를 보내셨군요. 깜짝 놀랐던 그 순간이 지금은 새로운 배움이나 즐거운 추억으로 남았길 바랄게요!": "놀람",
-    "오늘은 많이 화가 난 하루를 보내셨군요. 화를 느낄 때는 잠시 숨을 고르고, 차분히 생각을 정리하는 것도 도움이 될 거예요. 내일은 더 평온한 하루가 되길 바라요.": "분노",
-    "오늘은 두려움을 느낀 하루였던 것 같아요. 괜찮아요, 당신은 생각보다 훨씬 강한 사람입니다. 걱정되는 일이 있다면 믿을 수 있는 사람과 함께 나누어보세요.": "공포",
-    "오늘은 불쾌한 감정을 느끼셨군요. 이런 순간은 누구에게나 찾아오지만, 너무 오래 붙잡아 두지 말고 마음을 편하게 해줄 일을 찾아보세요. 당신의 하루는 더 소중하니까요.": "혐오",
-    "오늘은 감정적으로 특별한 일이 없었던 하루였군요. 평범한 날도 가끔은 소중합니다. 내일은 더 흥미롭고 즐거운 일이 가득하길 바라요!": "중립",
-}
+# MongoDB 연결 설정
+mongoDB_url: str = "mongodb+srv://ohmyuchu:ohmyuchu1111@test.9r2s8.mongodb.net/"
+database_name: str = "test"
 
-def get_comment_by_key(emotion: str) -> str:
+client = MongoClient(mongoDB_url)
+db = client[database_name]
+comment_collection = db['comment']  # 'comment' 컬렉션
+
+def get_comment(emotion: str) -> str:
     """
-    주어진 감정에 대한 코멘트를 반환하는 함수.
+    입력된 감정에 해당하는 코멘트를 MongoDB에서 가져와 랜덤으로 반환하는 함수입니다.
 
     Args:
-        emotion (str): 감정 이름 (기쁨, 슬픔, 놀람, 분노, 공포, 혐오, 중립)
+        emotion (str): 감정 이름 (예: '기쁨', '슬픔', '놀람', '분노', '공포', '혐오', '중립')
 
     Returns:
-        str: 해당 감정에 대응하는 코멘트
+        str: 해당 감정에 맞는 코멘트 문자열
     """
-    for comment, key_emotion in comment_to_emotion.items():
-        if key_emotion == emotion:
-            return comment
-    return "해당 감정에 맞는 코멘트를 찾을 수 없습니다."
+    # MongoDB에서 해당 감정의 코멘트 리스트를 가져옵니다.
+    comment_data = comment_collection.find_one({"emotion": emotion})
+
+    if comment_data and "comment" in comment_data:
+        # 코멘트 리스트에서 랜덤으로 하나 선택하여 반환
+        return random.choice(comment_data["comment"])
+    else:
+        return "해당 감정에 대한 코멘트를 찾을 수 없습니다."
+
+# 테스트 코드 (선택사항)
+if __name__ == "__main__":
+    test_emotion = "분노"  # 테스트할 감정 입력
+    comment = get_comment(test_emotion)
+    print(f"감정: {test_emotion}, 코멘트: {comment}")

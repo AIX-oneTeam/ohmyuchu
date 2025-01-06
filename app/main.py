@@ -8,6 +8,7 @@ from fastapi.templating import Jinja2Templates
 from requests import request
 from services.crawling_service import crawlingfromUrl
 from services.music_service import get_song_data
+from services.comment_service import get_comment
 from db import Database
 
 
@@ -54,14 +55,15 @@ async def summarization(request: Request, url: str = Form(...)):
 
     summary = crawlingfromUrl(url)
     emotion = analyze_emotion(summary['summary'])
+    #감정에 따른 랜덤 코멘트 가져오기
+    comment = get_comment(emotion)
 
     music = await get_song_data(emotion, songs_collection, analysis_collection)
-    comment = await comment_collection.find_one({"emotion": emotion})
     print("comment", comment)
     data = {
         "summary": summary['summary'],
         "emotion": emotion,
-        "comment": comment['comment'],
+        "comment": comment,
         "music":{
             "title": music['title'],
             "artist": music['artist'],
