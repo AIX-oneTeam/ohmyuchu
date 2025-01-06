@@ -13,18 +13,22 @@
   </head>
   <body>
     <header class="header_green">
-      <div class="logo_green">OHMUCHOO</div>
+      <div class="logo_green">감정 분석 결과</div>
     </header>
 
     <main class="ret_container">
     <section class="ret_text_container">
+      <div class="ret_header_green">
+        <div class="ret_logo_green">OHMUCHOO</div>
+      </div>
       <div class="ret_text_summary">
         <h2 class="ret_text_summary--header">아티클 요약</h2>
         <p class="ret_text_summary--bold">"{{ data.summary }}"</p>
       </div>
 
+      <div class= "ret_text_emotion_container">
+      <h2 class="ret_text_emotion--header">글에서 느껴지는 주요 감정</h2>
       <div class="ret_text_emotion">
-        <h2 class="ret_text_emotion--header">글에서 느껴지는 주요 감정</h2>
         <p class="ret_text_emotion--plane">
           당신의 글에선 
           <span class="ret_text_emotion--bold">{{ data.emotion }}</span>
@@ -32,6 +36,7 @@
         </p>
         <p>{{data.comment}}</p>
         
+      </div>
       </div>
     </section>
       <div class="button_container">
