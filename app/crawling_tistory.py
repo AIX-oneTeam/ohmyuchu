@@ -13,7 +13,7 @@ def get_tistory_content(url):
         soup = BeautifulSoup(response.content, "html.parser")
 
         # 제목 추출 추가
-        title = soup.find("title")
+        title = soup.find(".title-article")
         title_text = title.get_text(strip=True) if title else "제목을 찾을 수 없습니다."
 
         # 각 콘텐츠 추출 (기존 코드 유지)

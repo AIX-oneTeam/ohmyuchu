@@ -1,8 +1,15 @@
+from dotenv import load_dotenv
+import os
+
+# .env 파일에서 환경 변수 로드
+load_dotenv()
+
 from pymongo import MongoClient
 from datetime import datetime
+mongoDB = os.getenv("mongoDB")
 
 # MongoDB 연결 설정
-mongoDB_url: str = "mongodb+srv://ohmyuchu:ohmyuchu1111@test.9r2s8.mongodb.net/"
+mongoDB_url: str = mongoDB
 database_name: str = "test"
 
 client = MongoClient(mongoDB_url)  # MongoDB URI로 교체
