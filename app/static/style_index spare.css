@@ -326,11 +326,11 @@ li{
 }
 @media (max-width: 600px){
   .sites > p{
-      font-size: 15px;
+      font-size: 20px;
    }
    
    .site-list{
-      font-size: 10px;
+      font-size: 16px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -356,24 +356,15 @@ li{
 
 /*로딩 중*/ 
 .loadingPage{
+position: absolute;
+margin-bottom: 350px;
 width: 500px;
-min-height: 400px;
+height: 370px;
+background-color: #d7f9a3;
+display: flex;
+align-items: center;
+justify-content: center;
 font-size: 60px;
 z-index: 8888;
-display:block;
 transition: all 0.3s;
-}
-
-@media (max-width: 480px) {
-    .loadingPage{
-      font-size: 35px;
-      z-index: 8888;
-      display: flex;
-      transition: all 0.3s;
-      margin-left: 200px;
-  }
-  .down-emoji{
-    width: 300px;
-    height: auto;
-  }
 }

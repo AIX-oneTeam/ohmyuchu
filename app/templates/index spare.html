@@ -26,12 +26,12 @@
       </div>
     </header>
     <main class="container">
-      <h1 class="main-title">오늘의 뮤직 추천!</h1>
       <div class="loadingPage" style="display: none;">
         <p>잠시만 기다려주세요</p>
-        <img src="../static/assets/down.gif" alt="down emoji" class="down-emoji">
+        <img src="../static/assets/down.gif" alt="down emoji">
       </div>
-      <div class="subtitle" style="display: block;">
+      <h1 class="main-title">오늘의 뮤직 추천!</h1>
+      <div class="subtitle">
         <p>글로 남겨진 나의 이야기</p>
         <p>감정을 파악하고,</p>
         <p>어울리는 음악을 추천해드려요!</p>
@@ -72,7 +72,7 @@
           총
           <span class="blue">{{count_data.total_count}}</span>명이 이용했어요!
         </p>
-        <p class="count-text">
+        <p>
           오늘은 총
           <span class="red">{{count_data.today_count}}</span>명이 이용했어요!
         </p>
@@ -171,11 +171,10 @@
     event.preventDefault();
     
     const loadingPage = document.querySelector(".loadingPage");
-    const subtitlePage =document.querySelector(".subtitle");
 
     // 'loadingPage'가 보이도록 설정
     loadingPage.style.display = "block";
-    subtitlePage.style.display = "none";
+
     // 폼 제출을 수동으로 실행
     document.getElementById("urlForm").submit();
 }
