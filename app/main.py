@@ -48,7 +48,7 @@ async def read_root(request: Request):
 async def summarization(request: Request, url: str = Form(...)):
     songs_collection = Database.db['songs']
     analysis_collection = Database.db['analysis']
-    comment_collection = Database.db['comments']
+    comment_collection = Database.db['comment']
 
     # 1) 크롤링 시도
     try:

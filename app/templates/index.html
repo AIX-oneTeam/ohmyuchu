@@ -26,6 +26,10 @@
       </div>
     </header>
     <main class="container">
+      <div class="loadingPage" style="display: none;">
+        <p>잠시만기다려주세요</p>
+        <img src="../static/assets/down.gif" alt="down emoji">
+      </div>
       <h1 class="main-title">오늘의 뮤직 추천!</h1>
       <div class="subtitle">
         <p>글로 남겨진 나의 이야기</p>
@@ -33,17 +37,10 @@
         <p>어울리는 음악을 추천해드려요!</p>
         <p class="subtitle--url">URL을 알려주세요!</p>
       </div>
-
-      <form class="input-container" method="POST" action="v1/models/summary">
-        <input
-          type="text"
-          placeholder="URL을 입력해주세요."
-          class="url-input"
-          name="url"
-        />
-        <button class="submit-button" type="submit" onclick="counting()">
-          결과 보기
-        </button>
+      <form class="input-container" method="POST" action="v1/models/summary" id="urlForm">
+        <input type="text" placeholder="URL을 입력해주세요." class="url-input" name="url" />
+        <!-- type="submit" -->
+        <button class="submit-button" onClick="loadingShow(event); counting()">결과 보기</button>
       </form>
 
       <img
@@ -168,6 +165,20 @@
         const logoutBtn = document.querySelector(".logout");
         logoutBtn.addEventListener("click", handleLogout);
       });
+
+      function loadingShow(event) {
+    // 폼 제출을 막음
+    event.preventDefault();
+    
+    const loadingPage = document.querySelector(".loadingPage");
+
+    // 'loadingPage'가 보이도록 설정
+    loadingPage.style.display = "block";
+
+    // 폼 제출을 수동으로 실행
+    document.getElementById("urlForm").submit();
+}
+
     </script>
   </body>
 </html>
