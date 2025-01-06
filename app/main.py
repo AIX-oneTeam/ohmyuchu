@@ -1,5 +1,5 @@
 from typing import Union
-from services.share_service import capture_page
+from services.day_count_service import save_day_count
 from services.emotion_service import analyze_emotion 
 from fastapi import FastAPI, Form, Request, HTTPException, Body
 from contextlib import asynccontextmanager
@@ -128,3 +128,11 @@ async def decrease_dislike(data: dict = Body(...)):
         raise HTTPException(status_code=404, detail="Song not found")
     
     return {"message": "disLike count updated successfully"}
+
+@app.post("/addCount")
+async def addCount(userInfo: dict = Body(...)):
+    # userInfo를 받아 DB에 저장하는 메서드
+    # userInfo에 이미 로그인 여부 정보 담겨있음.
+    # 비회원일 경우 email = anaonymous, nickname = anonymous
+    print("userInfo: ", userInfo) 
+    save_day_count(userInfo)

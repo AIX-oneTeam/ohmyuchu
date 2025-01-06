@@ -90,6 +90,36 @@
     </footer>
 
     <script>
+      const counting = async () => {
+        let userInfo = {
+          email: "anonymous",
+          nickname: "anonymous",
+        };
+        kakaoToken = null;
+        //로그인 되어있을 경우 정보를 userInfo에 저장
+        if (checkLoginStatus()) {
+          kakaoToken = localStorage.getItem("kakaoToken");
+          userInfo = {
+            email: kakaoToken.email,
+            nickname: kakaoToken.nickname,
+          };
+        }
+
+        console.log(userInfo);
+
+        try {
+          const response = await fetch("http://127.0.0.1:8000/addCount", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userInfo: userInfo }),
+          });
+        } catch (err) {
+          console.error("요청 실패:", err);
+        }
+      };
+    </script>
+
+    <script>
       // 로그인 상태 관리
       function checkLoginStatus() {
         const token = localStorage.getItem("kakaoToken");
