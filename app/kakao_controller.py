@@ -15,7 +15,7 @@ KAKAO_REDIRECT_URI = os.getenv("KAKAO_REDIRECT_URI")
 mongoDB_url = os.getenv("mongoDB")
 
 # MongoDB 설정
-database_name = "ohmyuchu"
+database_name = "test"
 client = MongoClient(mongoDB_url)
 db = client[database_name]
 user_collection = db["user"]
