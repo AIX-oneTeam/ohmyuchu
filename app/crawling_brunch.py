@@ -34,8 +34,6 @@ def get_brunch_content(url):
         else:
             cleaned_text = '본문을 찾을 수 없습니다.'
         
-        
-        
         return {
             'title': title_text,
             'content': cleaned_text,
