@@ -27,10 +27,10 @@ async def lifespan(app: FastAPI ):
     yield
     # print("Disconnecting DataBase")
     # await db.disconnect()
-    
+
 app = FastAPI(lifespan=lifespan)
 
-# 정적 파일 경로 추가 
+# 정적 파일 경로 추가
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Kakao 라우터 등록
@@ -40,8 +40,8 @@ app.include_router(kakao_router, prefix="/auth/kakao")
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
-    
-#결과 페이지
+
+# 결과 페이지
 @app.get("/result", response_class=HTMLResponse)
 async def read_result(request: Request):
     return templates.TemplateResponse("result.html", {"request": request})
@@ -53,6 +53,7 @@ async def summarization(request: Request, url: str = Form(...)):
     comment_collection = Database.db['comments']
 
     summary = crawlingfromUrl(url)
+
     emotion = analyze_emotion(summary['summary'])
 
     music = await get_song_data(emotion, songs_collection, analysis_collection)
@@ -108,4 +109,3 @@ async def decrease_dislike(data: dict = Body(...)):
         raise HTTPException(status_code=404, detail="Song not found")
     
     return {"message": "disLike count updated successfully"}
-
