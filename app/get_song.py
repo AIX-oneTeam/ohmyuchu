@@ -3,16 +3,18 @@ from fastapi import FastAPI
 from fastapi.templating import Jinja2Templates
 from fastapi import Request
 
+
 app = FastAPI()
 
 client = MongoClient("mongodb+srv://yesol:yesol9639@test.9r2s8.mongodb.net/")  # 기본 로컬 MongoDB 서버에 연결
 db = client['test']  # 사용할 데이터베이스 이름
-collection = db['songs']  # 사용할 컬렉션 이름 (여기서는 'playlists' 컬렉션)
+collection = db['songs']  # 사용할 컬렉션 이름 
 
 templates = Jinja2Templates(directory="templates")
 
-# 감정을 변수로 받아 해당하는 플레이리스트의 가수,제목, 연결url를 리턴하는 함수
 
+
+# 감정을 변수로 받아 해당하는 플레이리스트의 가수,제목, 연결url를 리턴하는 함수
 @app.get("/song/")
 def get_song_data(request:Request, emotion:str) :
     # 감정에 해당하는 노래 중에서 랜덤으로 하나 선택
@@ -33,10 +35,6 @@ def get_song_data(request:Request, emotion:str) :
             "src": selected_song["src"]
         }
 
-    #     result = selected_song(
-    #     {"title": selected_song["title"]},
-    #     {"$inc": {"like_count": 1}}
-    # )
         return templates.TemplateResponse("/result.html", {
          "request": request,
          "song": song_data
