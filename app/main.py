@@ -81,7 +81,7 @@ async def increase_like(data: dict = Body(...)):
     if not title:
         raise HTTPException(status_code=400, detail="Title is required")
     
-    result = songs_collection.update_one(
+    result = await songs_collection.update_one(
         {"title": title},
         {"$inc": {"like_count": 1}}
     )
@@ -100,7 +100,7 @@ async def decrease_dislike(data: dict = Body(...)):
     if not title:
         raise HTTPException(status_code=400, detail="Title is required")
     
-    result = songs_collection.update_one(
+    result = await songs_collection.update_one(
         {"title": title},
         {"$inc": {"dislike_count": 1}}
     )
