@@ -1,9 +1,13 @@
 from motor.motor_asyncio import AsyncIOMotorClient
     
 # DB 정보
-# mongoDB_url: str = "mongodb://192.168.0.141:27017"
-# database_name: str = "ohmyuchu"
-mongoDB_url: str = "mongodb+srv://ohmyuchu:ohmyuchu1111@test.9r2s8.mongodb.net/"
+from dotenv import load_dotenv
+import os
+
+# .env 파일에서 환경 변수 로드
+load_dotenv()
+mongoDB = os.getenv("mongoDB")
+mongoDB_url: str = mongoDB
 database_name: str = "test"
 
 # DB 리소스 관리 객체
