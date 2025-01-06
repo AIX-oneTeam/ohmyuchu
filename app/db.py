@@ -1,6 +1,5 @@
 from motor.motor_asyncio import AsyncIOMotorClient
-
-
+    
 # DB 정보
 # mongoDB_url: str = "mongodb://192.168.0.141:27017"
 # database_name: str = "ohmyuchu"
