@@ -1,4 +1,5 @@
 from typing import Union
+from services.share_service import capture_page
 from services.emotion_service import analyze_emotion 
 from fastapi import FastAPI, Form, Request, HTTPException, Body
 from contextlib import asynccontextmanager
@@ -26,12 +27,12 @@ async def lifespan(app: FastAPI ):
     app.mongodb = db.client["test"]    
 
     yield
-    # print("Disconnecting DataBase")
-    # await db.disconnect()
-    
+    print("Disconnecting DataBase")
+    await db.disconnect()
+
 app = FastAPI(lifespan=lifespan)
 
-# 정적 파일 경로 추가 
+# 정적 파일 경로 추가
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Kakao 라우터 등록
@@ -41,27 +42,45 @@ app.include_router(kakao_router, prefix="/auth/kakao")
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
-    
-#결과 페이지
-@app.get("/result", response_class=HTMLResponse)
-async def read_result(request: Request):
-    return templates.TemplateResponse("result.html", {"request": request})
 
 @app.post("/v1/models/summary")
 async def summarization(request: Request, url: str = Form(...)):
-    songs_collection = Database.db['songs']  
+    songs_collection = Database.db['songs']
     analysis_collection = Database.db['analysis']
     comment_collection = Database.db['comments']
 
-    summary = crawlingfromUrl(url)
-    emotion = analyze_emotion(summary['summary'])
+    # 1) 크롤링 시도
+    try:
+        summary = crawlingfromUrl(url)  # dict 형태를 기대
+        # summary['summary']가 없으면 KeyError가 날 수 있으므로 아래에서도 감싸기
+        main_summary = summary['summary']
+    except KeyError:
+        # summary['summary'] 키가 없으면 => 잘못된 url이거나 크롤링 실패
+        content = """
+        <script>
+            alert("유효하지 않은 URL이거나 처리할 수 없습니다. 다시 입력해주세요!");
+            window.location.href = "/";
+        </script>
+        """
+        return HTMLResponse(content=content, status_code=200)
+    except Exception as e:
+        # 그 외 모든 예외 처리 (requests 에러, 등등)
+        content = f"""
+        <script>
+            alert("에러가 발생했습니다: {str(e).replace('"','\\"')}");
+            window.location.href = "/";
+        </script>
+        """
+        return HTMLResponse(content=content, status_code=200)
+
+    # 2) 정상적으로 수집된 경우 처리
+    emotion = analyze_emotion(main_summary)
+    music = await get_song_data(emotion, songs_collection, analysis_collection)
     #감정에 따른 랜덤 코멘트 가져오기
     comment = get_comment(emotion)
 
-    music = await get_song_data(emotion, songs_collection, analysis_collection)
-    print("comment", comment)
     data = {
-        "summary": summary['summary'],
+        "summary": main_summary,
         "emotion": emotion,
         "comment": comment,
         "music":{
@@ -70,7 +89,6 @@ async def summarization(request: Request, url: str = Form(...)):
             "src": music['src']
         }
     }
-
     return templates.TemplateResponse("result.html", {"request": request, "data": data})
 
 @app.post("/like")
@@ -83,7 +101,7 @@ async def increase_like(data: dict = Body(...)):
     if not title:
         raise HTTPException(status_code=400, detail="Title is required")
     
-    result = songs_collection.update_one(
+    result = await songs_collection.update_one(
         {"title": title},
         {"$inc": {"like_count": 1}}
     )
@@ -102,7 +120,7 @@ async def decrease_dislike(data: dict = Body(...)):
     if not title:
         raise HTTPException(status_code=400, detail="Title is required")
     
-    result = songs_collection.update_one(
+    result = await songs_collection.update_one(
         {"title": title},
         {"$inc": {"dislike_count": 1}}
     )
@@ -110,4 +128,3 @@ async def decrease_dislike(data: dict = Body(...)):
         raise HTTPException(status_code=404, detail="Song not found")
     
     return {"message": "disLike count updated successfully"}
-
