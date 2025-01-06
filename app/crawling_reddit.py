@@ -13,9 +13,9 @@ def get_reddit_content(url: str) -> dict:
     try:
         # Reddit API 초기화
         reddit = praw.Reddit(
-            client_id="mCpW5hFdCqnojb9XnVVywg",
-            client_secret="5pdCX0laJzwXs5a87q8souH2lAkMxg",
-            user_agent="script:TestApp:v1.0",
+            client_id="",
+            client_secret="",
+            user_agent="",
         )
 
         # 게시글 ID 추출
