@@ -44,11 +44,17 @@ async def read_root(request: Request):
     count_data = await print_day_count()
     return templates.TemplateResponse("index.html", {"request": request, "count_data": count_data})
 
+# @app.get("/result", response_class=HTMLResponse)
+# async def read_result(request: Request):
+#     return templates.TemplateResponse("result.html", {"request": request, "data": data})
+
 @app.post("/v1/models/summary")
-async def summarization(request: Request, url: str = Form(...)):
+async def summarization(request: Request, userInfo: str = Form(...), url: str = Form(...)):
     songs_collection = Database.db['songs']
     analysis_collection = Database.db['analysis']
     comment_collection = Database.db['comment']
+
+    print(f"Received URL: {userInfo}")  # 요청 URL 확인
 
     # 1) 크롤링 시도
     try:

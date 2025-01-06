@@ -48,8 +48,13 @@
           class="url-input"
           name="url"
         />
+        <input type="hidden" name="userInfo" id="userInfo" />
         <!-- type="submit" -->
-        <button class="submit-button" onClick="loadingShow(event); counting()">
+        <button
+          type="submit"
+          class="submit-button"
+          onclick="loadingShow(event); counting()"
+        >
           결과 보기
         </button>
       </form>
@@ -127,6 +132,8 @@
 
         console.log(userInfo);
 
+        document.querySelector("#userInfo").value = JSON.stringify(userInfo);
+
         try {
           const response = await fetch("http://127.0.0.1:8000/addCount", {
             method: "POST",
@@ -187,7 +194,7 @@
         loadingPage.style.display = "block";
 
         // 폼 제출을 수동으로 실행
-        document.getElementById("urlForm").submit();
+        //document.getElementById("urlForm").submit();
       }
     </script>
   </body>
