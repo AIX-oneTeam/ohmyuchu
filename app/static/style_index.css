@@ -213,15 +213,14 @@ li{
       display: flex;
       flex-direction: column;
       gap: 10px;
-      padding-top: 24px;
       align-items: center;
       font-family: 'DNFBitBitv2', sans-serif;
-      font-size: 20px;
+      font-size: 10px;
       color: #000000;
 }
 
 .sites > p {
-      font-size: 24px;
+      font-size: 15px;
 }
 
 .site-list{
