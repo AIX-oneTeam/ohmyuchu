@@ -35,7 +35,7 @@
       </div>
     </section>
       <div class="button_container">
-        <button class="btn">공유</button>
+        <button class="btn" id="capture-btn">공유</button>
         <button class="btn blue" onclick="likeSong('{{data.music.title | tojson}}')">좋아요</button>
         <button class="btn red" onclick="likeSong('{{data.music.title | tojson}}')">싫어요</button>
       </div>
@@ -63,9 +63,6 @@
           </li>
         </ul>
     </section>
-
-    
-
     </main>
     <footer class="footer_green">
     <div class="footer_btn_container">
@@ -76,6 +73,25 @@
         <p>2025. All rights reserved.</p>
       </div>
     </footer>
+  </body>
+  <script>
+    // emotion에 따른 글자 색 변경
+    const emotion = document.querySelector(".ret_text_emotion--bold")
+    if(emotion.textContent === '기쁨')
+    emotion.style.color = "#FFD700"
+    else if(emotion.textContent === '슬픔')
+    emotion.style.color = "#0000FF"
+    else if(emotion.textContent === '분노')
+    emotion.style.color = "#FF0000"
+    else if(emotion.textContent === '놀람')
+    emotion.style.color = "#FFA500"
+    else if(emotion.textContent === '공포')
+    emotion.style.color = "#800080"
+    else if(emotion.textContent === '혐오')
+    emotion.style.color = "#008000"
+    else if(emotion.textContent === '중립');
+
+  </script>
 
     <script>
       async function likeSong(title) {
@@ -116,5 +132,25 @@
         }
       }
     </script>
-  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+      // JavaScript 캡처 기능
+      document.getElementById('capture-btn').addEventListener('click', async () => {
+          const captureArea = document.querySelector('.ret_text_container');
+          
+          // html2canvas로 요소 캡처
+          html2canvas(captureArea).then(canvas => {
+              // 캡처 결과를 Base64로 변환
+              const base64Image = canvas.toDataURL('image/png');
+
+              // 클립보드에 복사
+              navigator.clipboard.writeText(base64Image).then(() => {
+                  alert('이미지가 클립보드에 복사되었습니다.');
+              }).catch(err => {
+                  console.error('Failed to copy image to clipboard:', err);
+              });
+          });
+      });
+  </script>
+
 </html>

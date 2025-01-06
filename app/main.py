@@ -1,4 +1,5 @@
 from typing import Union
+from services.share_service import capture_page
 from services.emotion_service import analyze_emotion 
 from fastapi import FastAPI, Form, Request, HTTPException, Body
 from contextlib import asynccontextmanager
@@ -25,8 +26,8 @@ async def lifespan(app: FastAPI ):
     app.mongodb = db.client["test"]    
 
     yield
-    # print("Disconnecting DataBase")
-    # await db.disconnect()
+    print("Disconnecting DataBase")
+    await db.disconnect()
     
 app = FastAPI(lifespan=lifespan)
 
@@ -41,10 +42,6 @@ app.include_router(kakao_router, prefix="/auth/kakao")
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
     
-#결과 페이지
-@app.get("/result", response_class=HTMLResponse)
-async def read_result(request: Request):
-    return templates.TemplateResponse("result.html", {"request": request})
 
 @app.post("/v1/models/summary")
 async def summarization(request: Request, url: str = Form(...)):
@@ -109,3 +106,9 @@ async def decrease_dislike(data: dict = Body(...)):
     
     return {"message": "disLike count updated successfully"}
 
+@app.post("/share")
+async def share():
+    # 결과 페이지 하드코딩
+    response = await capture_page()
+
+    return response
