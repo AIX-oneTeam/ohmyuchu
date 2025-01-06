@@ -27,18 +27,18 @@ song_data_list = [{
     "dislike_count": 0
 },
 {
-    "title": "CAN'T STOP THE FEELING!",
-    "artist": "Justin Timberlake",
-    "src": "https://www.youtube.com/embed/ru0K8uYEZWw?si=ZMvg_WfGKJy55BWn",
+    "title": "Festival",
+    "artist": "엄정화",
+    "src": "https://www.youtube.com/embed/aymUZ29UeLQ?si=3RPZN4zWokKKJr0M",
     "emotion": "기쁨",
     "play_count": 0,
     "like_count": 0,
     "dislike_count": 0
 },
 {
-    "title": "Shake It Off",
-    "artist": "Taylor Swift",
-    "src": "https://www.youtube.com/embed/nfWlot6h_JM?si=OxICv4ufWgKStWRb",
+    "title": "HAPPY",
+    "artist": "데이식스(DAY-6)",
+    "src": "https://www.youtube.com/embed/2o1zdX72400?si=juBPGQyOAEqUdle8",
     "emotion": "기쁨",
     "play_count": 0,
     "like_count": 0,
@@ -123,9 +123,9 @@ song_data_list = [{
     "like_count": 0,
     "dislike_count": 0
 },{
-    "title": "OMG",
-    "artist": "뉴진스(NewJeans)",
-    "src": "https://www.youtube.com/embed/sVTy_wmn5SU?si=KZujqGDJPjaA_41g",
+    "title": "어머나",
+    "artist": "장윤정",
+    "src": "https://www.youtube.com/embed/1g5BXEcv5zQ?si=L-lrN9lu_1Jx8Jpc",
     "emotion": "놀람",
     "play_count": 0,
     "like_count": 0,
@@ -336,7 +336,7 @@ song_data_list = [{
 }
 
 ]
-#데이터 삽입
+# #데이터 삽입
 # result = songs.insert_many(song_data_list)
 
 # # 삽입 결과 확인
@@ -413,24 +413,3 @@ message_data_list = [
 
 # # # 삽입 결과 확인
 # print(f"Inserted document ID: {result.inserted_ids}")
-
-# anaylsis
-analysis = db['analysis']  # 컬렉션 이름
-analysis_data = {
-    "total_play_count" : 0,
-    "emotion_summary": {
-        "기쁨": 0,
-        "슬픔": 0,
-        "놀람": 0,
-        "분노": 0,
-        "공포": 0,
-        "혐오": 0,
-        "중립": 0                
-    }
-}
-
-# # 데이터 삽입
-# result = analysis.insert_one(analysis_data)
-
-# # 삽입 결과 확인
-# print(f"Inserted document ID: {result.inserted_id}")
