@@ -36,8 +36,8 @@
     </section>
       <div class="button_container">
         <button class="btn" id="capture-btn">공유</button>
-        <button class="btn blue" onclick="likeSong('{{data.music.title | tojson}}')">좋아요</button>
-        <button class="btn red" onclick="dislikeSong('{{data.music.title | tojson}}')">싫어요</button>
+        <button class="btn blue" onclick="likeSong('{{data.music.title}}')">좋아요</button>
+        <button class="btn red" onclick="dislikeSong('{{data.music.title}}')">싫어요</button>
       </div>
       
 
@@ -93,45 +93,47 @@
 
   </script>
 
-    <script>
-      async function likeSong(title) {
-        try {
-          const response = await fetch('http://127.0.0.1:8000/like', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: title })
-          });
-          if (response.ok) {
-            alert('좋아요가 반영되었습니다!');
-          } else {
-            const error = await response.json();
-            alert(`에러 발생: ${error.detail}`);
-          }
-        } catch (err) {
-          console.error('요청 실패:', err);
-          alert('서버와의 통신 중 오류가 발생했습니다.');
+  <script>
+    async function likeSong(title) {
+      console.log(title)
+      try {
+        const response = await fetch('http://127.0.0.1:8000/like', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: title })
+        });
+        if (response.ok) {
+          alert('좋아요가 반영되었습니다!');
+        } else {
+          const error = await response.json();
+          alert(`에러 발생: ${error.detail}`);
         }
+      } catch (err) {
+        console.error('요청 실패:', err);
+        alert('서버와의 통신 중 오류가 발생했습니다.');
       }
+    }
 
-      async function dislikeSong(title) {
-        try {
-          const response = await fetch('http://127.0.0.1:8000/dislike', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: title })
-          });
-          if (response.ok) {
-            alert('싫어요가 반영되었습니다!');
-          } else {
-            const error = await response.json();
-            alert(`에러 발생: ${error.detail}`);
-          }
-        } catch (err) {
-          console.error('요청 실패:', err);
-          alert('서버와의 통신 중 오류가 발생했습니다.');
+    async function dislikeSong(title) {
+      console.log(title)
+      try {
+        const response = await fetch('http://127.0.0.1:8000/dislike', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: title })
+        });
+        if (response.ok) {
+          alert('싫어요가 반영되었습니다!');
+        } else {
+          const error = await response.json();
+          alert(`에러 발생: ${error.detail}`);
         }
+      } catch (err) {
+        console.error('요청 실패:', err);
+        alert('서버와의 통신 중 오류가 발생했습니다.');
       }
-    </script>
+    }
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
       // JavaScript 캡처 기능
