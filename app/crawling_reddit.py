@@ -1,4 +1,13 @@
+from dotenv import load_dotenv
+import os
+
+# .env 파일에서 환경 변수 로드
+load_dotenv()
 import praw
+
+REDDIT_ID = os.getenv("REDDIT_ID")
+REDDIT_SECRET = os.getenv("REDDIT_SECRET")
+USER_AGENT = os.getenv("USER_AGENT")
 
 def get_reddit_content(url: str) -> dict:
     """
@@ -13,9 +22,9 @@ def get_reddit_content(url: str) -> dict:
     try:
         # Reddit API 초기화
         reddit = praw.Reddit(
-            client_id="",
-            client_secret="",
-            user_agent="",
+            client_id=REDDIT_ID,
+            client_secret=REDDIT_SECRET,
+            user_agent=USER_AGENT,
         )
 
         # 게시글 ID 추출

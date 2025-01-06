@@ -1,4 +1,4 @@
-async def get_song_data(emotion:str, songs_collection, analysis_collection) :
+async def get_song_data(emotion:str, songs_collection) :
 
     # 감정에 해당하는 노래 중에서 랜덤으로 하나 선택
     random_song_list = await songs_collection.aggregate([
@@ -21,10 +21,5 @@ async def get_song_data(emotion:str, songs_collection, analysis_collection) :
         {"$inc": {"play_count": 1}}
     )
 
-    await analysis_collection.update_one(
-        {"title": selected_song["title"]},
-        {"$inc": {"total_play_count": 1,
-                    f"emotion_summary.{emotion}": 1}}
-    )
     return song_data
 
