@@ -48,19 +48,41 @@ async def read_result(request: Request):
 
 @app.post("/v1/models/summary")
 async def summarization(request: Request, url: str = Form(...)):
-    songs_collection = Database.db['songs']  
+    songs_collection = Database.db['songs']
     analysis_collection = Database.db['analysis']
     comment_collection = Database.db['comments']
 
-    summary = crawlingfromUrl(url)
+    # 1) 크롤링 시도
+    try:
+        summary = crawlingfromUrl(url)  # dict 형태를 기대
+        # summary['summary']가 없으면 KeyError가 날 수 있으므로 아래에서도 감싸기
+        main_summary = summary['summary']
+    except KeyError:
+        # summary['summary'] 키가 없으면 => 잘못된 url이거나 크롤링 실패
+        content = """
+        <script>
+            alert("유효하지 않은 URL이거나 처리할 수 없습니다. 다시 입력해주세요!");
+            window.location.href = "/";
+        </script>
+        """
+        return HTMLResponse(content=content, status_code=200)
+    except Exception as e:
+        # 그 외 모든 예외 처리 (requests 에러, 등등)
+        content = f"""
+        <script>
+            alert("에러가 발생했습니다: {str(e).replace('"','\\"')}");
+            window.location.href = "/";
+        </script>
+        """
+        return HTMLResponse(content=content, status_code=200)
 
-    emotion = analyze_emotion(summary['summary'])
-
+    # 2) 정상적으로 수집된 경우 처리
+    emotion = analyze_emotion(main_summary)
     music = await get_song_data(emotion, songs_collection, analysis_collection)
     comment = await comment_collection.find_one({"emotion": emotion})
-    print("comment", comment)
+
     data = {
-        "summary": summary['summary'],
+        "summary": main_summary,
         "emotion": emotion,
         "comment": comment['comment'],
         "music":{
@@ -69,7 +91,6 @@ async def summarization(request: Request, url: str = Form(...)):
             "src": music['src']
         }
     }
-
     return templates.TemplateResponse("result.html", {"request": request, "data": data})
 
 @app.post("/like")
