@@ -56,7 +56,7 @@ li{
   font-family: "GangwonEduPowerExtraBoldA", sans-serif;
   width: 100%;
   padding: 20px;
-  margin-top: 20vh;
+  margin-top: 15vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -211,15 +211,14 @@ li{
       display: flex;
       flex-direction: column;
       gap: 10px;
-      padding-top: 24px;
       align-items: center;
       font-family: 'DNFBitBitv2', sans-serif;
-      font-size: 20px;
+      font-size: 10px;
       color: #000000;
 }
 
 .sites > p {
-      font-size: 24px;
+      font-size: 15px;
 }
 
 .site-list{
@@ -230,7 +229,7 @@ li{
 }
 
 .counting{
-  font-size: 18px;
+  font-size: 27px;
   padding: 24px; 
   display: flex;
   flex-direction: column;
@@ -238,12 +237,12 @@ li{
 }
 
 .blue{
-    font-size:24px;
+    font-size:30px;
     color: #E26928;
 }
 
 .red{
-    font-size:24px;
+    font-size:30px;
     color: #F5B227;
 }
 
@@ -358,7 +357,7 @@ li{
 /*로딩 중*/ 
 .loadingPage{
 position: absolute;
-margin-bottom: 200px;
+margin-bottom: 350px;
 width: 500px;
 height: 370px;
 background-color: #d7f9a3;
