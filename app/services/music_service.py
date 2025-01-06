@@ -18,7 +18,7 @@ async def get_song_data(emotion:str, songs_collection, analysis_collection) :
 
     await songs_collection.update_one(
         {"title": selected_song["title"]},
-        {"$inc": {"like_count": 1}}
+        {"$inc": {"play_count": 1}}
     )
 
     await analysis_collection.update_one(

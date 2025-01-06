@@ -10,7 +10,6 @@ db = client[database_name]  # 데이터베이스 이름
 
 # songs 데이터 삽입 저장할 데이터
 songs = db['songs']  # 컬렉션 이름
-
 song_data_list = [{
     "title": "아주 NICE",
     "artist": "세븐틴(SEVENTEEN)",
@@ -148,14 +147,193 @@ song_data_list = [{
     "play_count": 0,
     "like_count": 0,
     "dislike_count": 0
+},{
+    "title": "꺼져 줄게 잘 살아",
+    "artist": "지나",
+    "src": "https://www.youtube.com/embed/2eL3lKPVq-0?si=VR6ixLlQ8xNF4nVA",
+    "emotion": "분노",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "very good",
+    "artist": "블락비",
+    "src": "https://www.youtube.com/embed/kJGcO5Une-g?si=iiu5IGG6eqfIVKDx",
+    "emotion": "분노",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "Sixth Sense",
+    "artist": "브라운아이드걸스",
+    "src": "https://www.youtube.com/embed/pIqkDBsSJOw?si=VKGlh6GzNX1VCE5M",
+    "emotion": "분노",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "미친거니",
+    "artist": "송지은",
+    "src": "https://www.youtube.com/embed/n1TLaZp1i8E?si=jwnf8O-hWcgEn_Rq",
+    "emotion": "분노",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "왜",
+    "artist": "동방신기",
+    "src": "https://www.youtube.com/embed/djJb5iSL0Do?si=ZsuSzxdRipfH6tQv",
+    "emotion": "분노",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "HALLOWEEN Theme",
+    "artist": "John Carpenter ",
+    "src": "https://www.youtube.com/embed/gqVyois9mp4?si=N7W14mFBA1q9ZvM5",
+    "emotion": "공포",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "망향",
+    "artist": "자우림",
+    "src": "https://www.youtube.com/embed/pilr-XugoHA?si=b1wuKyQ31AbDniWo",
+    "emotion": "공포",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "발레리노",
+    "artist": "리쌍",
+    "src": "https://www.youtube.com/embed/G3qS8dD4kOk?si=humJO-fnHcOeWNBs",
+    "emotion": "공포",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "피해망상pt.1 ",
+    "artist": "에픽하이",
+    "src": "https://www.youtube.com/embed/Jj2YOsFVuHM?si=LUUNmHy_ZZY04PJd",
+    "emotion": "공포",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "피행망상 pt.3 (With TBNY)",
+    "artist": "에픽하이",
+    "src": "https://www.youtube.com/embed/wcSX4hs1bBM?si=X4-V4I7VYbdLqpp1",
+    "emotion": "공포",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "손대지마",
+    "artist": "에일리",
+    "src": "https://www.youtube.com/embed/5cnjdPHDZ0k?si=iJqUvmg1YXwd1NIb",
+    "emotion": "혐오",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "GO AWAY",
+    "artist": "2NE1",
+    "src": "https://www.youtube.com/embed/3yW13T2sfKg?si=yG8vIrT8U_0cEAR_",
+    "emotion": "혐오",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "toxic till the end ",
+    "artist": "ROSÉ",
+    "src": "https://www.youtube.com/embed/eA0lHNZ1KCA?si=ScBkMSbD2EmNy0nl",
+    "emotion": "혐오",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "Fxxked Up",
+    "artist": "전소미 ",
+    "src": "https://www.youtube.com/embed/yeCJ_MjsTYo?si=LZG8cqHAnFohY8tI",
+    "emotion": "혐오",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "꺼져",
+    "artist": "형돈이와 대준이",
+    "src": "https://www.youtube.com/embed/792jeZ08h94?si=8an62XCBuq0fT1uK",
+    "emotion": "혐오",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "별일 없이 산다",
+    "artist": "장기하와 얼굴들",
+    "src": "https://www.youtube.com/embed/CfXVsHNETq0?si=kbnkC4zfO2wBkfw_",
+    "emotion": "중립",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "골목길",
+    "artist": "양동근",
+    "src": "https://www.youtube.com/embed/3zr4HJHIWpU?si=hWvAgzm2EqhguJne",
+    "emotion": "중립",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "싸구려 커피",
+    "artist": "장기하와 얼굴들",
+    "src": "https://www.youtube.com/embed/bL-ueHzY2yM?si=5-tzXy93PwwjgC5n",
+    "emotion": "중립",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "봄에 내기엔 늦었고 여름에 내기엔 좀 이른 노래",
+    "artist": "형돈이와 대준이",
+    "src": "https://www.youtube.com/embed/rB7B8YF1ZrQ?si=MbvjNFf_rpRBi0bI",
+    "emotion": "중립",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
+},
+{
+    "title": "부럽지가 않어",
+    "artist": "장기하",
+    "src": "https://www.youtube.com/embed/SzyB2xBqkps?si=caUkGQ9bhhxRjw0q",
+    "emotion": "중립",
+    "play_count": 0,
+    "like_count": 0,
+    "dislike_count": 0
 }
+
 ]
-
 # 데이터 삽입
-result = songs.insert_many(song_data_list)
+# result = songs.insert_many(song_data_list)
 
-# 삽입 결과 확인
-print(f"Inserted document ID: {result.inserted_ids}")
+# # 삽입 결과 확인
+# print(f"Inserted document ID: {result.inserted_ids}")
 
 
 ##############
@@ -223,13 +401,13 @@ message_data_list = [
 }
 ]
 
-# # 데이터 삽입
-result = comment.insert_many(message_data_list)
+# # # 데이터 삽입
+# result = comment.insert_many(message_data_list)
 
-# # 삽입 결과 확인
-print(f"Inserted document ID: {result.inserted_ids}")
+# # # 삽입 결과 확인
+# print(f"Inserted document ID: {result.inserted_ids}")
 
-# comment
+# anaylsis
 analysis = db['analysis']  # 컬렉션 이름
 analysis_data = {
     "total_play_count" : 0,
@@ -245,7 +423,7 @@ analysis_data = {
 }
 
 # 데이터 삽입
-result = analysis.insert_one(analysis_data)
+# result = analysis.insert_one(analysis_data)
 
-# 삽입 결과 확인
-print(f"Inserted document ID: {result.inserted_id}")
+# # 삽입 결과 확인
+# print(f"Inserted document ID: {result.inserted_id}")
