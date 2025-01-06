@@ -2,6 +2,7 @@
 
 body {
   background-color: #d7f9a3;
+  height: 100vh;
 }
 
 li{
@@ -53,6 +54,7 @@ li{
 }
 
 .container {
+  position: relative;
   font-family: "GangwonEduPowerExtraBoldA", sans-serif;
   width: 100%;
   padding: 20px;
@@ -345,6 +347,12 @@ li{
       width: 100%;
       height: 80px;
    }
+
+.loadingPage > img{
+  width: 300px;
+  height: auto;
+  }
+
 }
 
 @media (max-width: 376px) {
@@ -357,13 +365,20 @@ li{
 
 /*로딩 중*/ 
 .loadingPage{
-position:absolute;
-width: 100vw;
-height: 100vh;
+position:fixed;
+width: 100%;
+height: 100%;
 background-color: rgba(0, 0, 0, 0.7);
-display: flex;
-align-items: center;
-justify-content: center;
 z-index: 8888;
 transition: all 0.3s;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.loadingPage > img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
