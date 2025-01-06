@@ -3,10 +3,18 @@ from fastapi import FastAPI
 from fastapi.templating import Jinja2Templates
 from fastapi import Request
 
+from dotenv import load_dotenv
+import os
+
+# .env 파일에서 환경 변수 로드
+load_dotenv()
+    
+# DB 정보
+mongoDB = os.getenv("mongoDB")
 
 app = FastAPI()
 
-client = MongoClient("mongodb+srv://yesol:yesol9639@test.9r2s8.mongodb.net/")  # 기본 로컬 MongoDB 서버에 연결
+client = MongoClient(mongoDB)  # 기본 로컬 MongoDB 서버에 연결
 db = client['test']  # 사용할 데이터베이스 이름
 collection = db['songs']  # 사용할 컬렉션 이름 
 
