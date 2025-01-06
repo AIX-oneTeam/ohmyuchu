@@ -329,7 +329,7 @@ song_data_list = [{
 }
 
 ]
-# 데이터 삽입
+#데이터 삽입
 # result = songs.insert_many(song_data_list)
 
 # # 삽입 결과 확인
@@ -401,7 +401,7 @@ message_data_list = [
 }
 ]
 
-# # # 데이터 삽입
+# # # # # 데이터 삽입
 # result = comment.insert_many(message_data_list)
 
 # # # 삽입 결과 확인
@@ -422,7 +422,7 @@ analysis_data = {
     }
 }
 
-# 데이터 삽입
+# # 데이터 삽입
 # result = analysis.insert_one(analysis_data)
 
 # # 삽입 결과 확인
