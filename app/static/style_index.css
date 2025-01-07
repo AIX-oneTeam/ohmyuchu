@@ -173,7 +173,7 @@ li{
   position: absolute;
   width: 300px;
   height: auto;
-  top: 25%;
+  top: 10%;
   right: 2%;
   animation: float 3.5s ease-in-out infinite;
 }
@@ -294,6 +294,8 @@ li{
 
   .book {
     width: 150px;
+    top: 25%;
+
   }
 
   .note {
