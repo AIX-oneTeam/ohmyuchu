@@ -2,6 +2,11 @@
 
 body {
   background-color: #d7f9a3;
+  height: 100vh;
+}
+
+li{
+   list-style-type: none;
 }
 
 .header_white {
@@ -49,10 +54,12 @@ body {
 }
 
 .container {
+  position: relative;
   font-family: "GangwonEduPowerExtraBoldA", sans-serif;
   width: 100%;
+  height: 100%;
   padding: 20px;
-  margin-top: 20vh;
+  /* margin-top: 10vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,6 +80,14 @@ body {
   margin-bottom: 40px;
   line-height: 1.5;
 }
+
+.subtitle--url{
+   font-size: 32px;
+   text-align: center;
+   padding-top: 30px;
+   line-height: 1.5;
+}
+
 
 .input-container {
   width: 100%;
@@ -158,7 +173,7 @@ body {
   position: absolute;
   width: 300px;
   height: auto;
-  top: 25%;
+  top: 10%;
   right: 2%;
   animation: float 3.5s ease-in-out infinite;
 }
@@ -193,6 +208,46 @@ body {
   width: 100%;
   position: fixed;
   bottom: 0;
+}
+
+.sites{
+      display: flex;
+      flex-direction: column;
+      /* gap: 10px; */
+      align-items: center;
+      font-family: 'DNFBitBitv2', sans-serif;
+      font-size: 10px;
+      color: #000000;
+      margin-top: 10px;
+}
+
+.sites > p {
+      font-size: 15px;
+}
+
+.site-list{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap:10px;
+}
+
+.counting{
+  font-size: 20px;
+  padding-top: 40px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blue{
+    font-size:25px;
+    color: #E26928;
+}
+
+.red{
+    font-size:25px;
+    color: #F5B227;
 }
 
 @keyframes float {
@@ -239,6 +294,8 @@ body {
 
   .book {
     width: 150px;
+    top: 25%;
+
   }
 
   .note {
@@ -259,22 +316,88 @@ body {
 }
 
 @media (max-width: 400px) {
-  .submit-button {
-    font-size: 12px;
-    white-space: nowrap;
-    transform: translateX(-30px);
+   .submit-button {
+      font-size: 12px;
+      white-space: nowrap;
+      transform:translateX(-30px);
+   }
+
+   .subtitle{
+      padding: 20px;
+      border-radius: 25px;
+      background-color: rgba(255, 255, 255, 0.7);
+   }
+
+   
+}
+@media (max-width: 600px){
+  .sites{
+    gap: 10px;
   }
 
-  .subtitle {
-    padding: 20px;
-    border-radius: 25px;
-    background-color: rgba(255, 255, 255, 0.7);
+  .sites > p{
+      font-size: 18px;
+   }
+   
+   .site-list{
+      font-size: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap:5px;
+   }
+
+   .counting > p {
+    font-size: 23px;
+   }
+
+   .counting > p > span{
+    font-size: 26px;
+   }
+   
+   .counting::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 50px;
+   }
+
+.loadingPage > img{
+  width: 300px;
+  height: auto;
   }
+
 }
+
 @media (max-width: 376px) {
   .submit-button {
     font-size: 12px;
     white-space: nowrap;
     transform: translateX(-40px);
   }
+
+  .container{
+    margin-top: 10vh;
+  }
+}
+
+/*로딩 중*/ 
+.loadingPage{
+position:fixed;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.7);
+z-index: 8888;
+transition: all 0.3s;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.loadingPage > img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

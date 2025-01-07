@@ -6,42 +6,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--브라우저가 문서를해석할때 한글을 UTF-8형식으로 해석-->
-    <title>OHMYUCHOO</title>
+    <title>OHMUCHOO</title>
     <link rel="stylesheet" href="/static/style_result.css" />
     <!-- for live server -->
     <!-- <link rel="stylesheet" href="../static/style_result.css" /> -->
   </head>
   <body>
     <header class="header_green">
-      <div class="logo_green">OHMYUCHOO</div>
+      <div class="logo_green">감정 분석 결과</div>
     </header>
 
     <main class="ret_container">
     <section class="ret_text_container">
+      <div class="ret_header_green">
+        <div class="ret_logo_green">OHMUCHOO</div>
+      </div>
       <div class="ret_text_summary">
         <h2 class="ret_text_summary--header">아티클 요약</h2>
-        <p class="ret_text_summary--bold">"{{ summary }}"</p>
+        <p class="ret_text_summary--bold">"{{ data.summary }}"</p>
       </div>
 
+      <div class= "ret_text_emotion_container">
+      <h2 class="ret_text_emotion--header">글에서 느껴지는 주요 감정</h2>
       <div class="ret_text_emotion">
-        <h2 class="ret_text_emotion--header">글에서 느껴지는 주요 감정</h2>
         <p class="ret_text_emotion--plane">
           당신의 글에선 
-          <ul>
-          {% for emotion in emotions %} 
-          <li class="ret_text_emotion--bold">{{ emotion }}예시 감정</li>
-          {% endfor %}
-          </ul>
-          가 느껴지네요.
+          <span class="ret_text_emotion--bold">{{ data.emotion }}</span>
+          (이)가 느껴지네요.
         </p>
-        <p>{{commment}}</p>
+        <p>{{data.comment}}</p>
         
+      </div>
       </div>
     </section>
       <div class="button_container">
-        <button class="btn">공유</button>
-        <button class="btn blue">좋아요</button>
-        <button class="btn red">싫어요</button>
+        <button class="btn" id="capture-btn">공유</button>
+        <button class="btn blue" onclick="likeSong('{{data.music.title}}')">좋아요</button>
+        <button class="btn red" onclick="dislikeSong('{{data.music.title}}')">싫어요</button>
       </div>
       
 
@@ -49,27 +50,114 @@
       <div class="ret_music_summary">
         <h2 class="ret_music_summary--header">AI가 선정한 추천 음악</h2>
         <ul class="ret_music_choose">
-          <li class="ret_music_choose--img">
-            <img src="{{ album_img }}" alt="음악 앨범 이미지" />
-            <div class="ret_music_choose--info">
-              <p class="ret_music_choose--info--bold">{{ title }}</p>
-              <p class="ret_music_choose--info--plain">{{ artist }}</p>
+          <li class="ret_music_choose--item">
+            <h2>{{ data.music.title }}</h2>
+              <iframe class="iframe-container"
+                    width="633"
+                    height="524"
+                    src="{{ data.music.src }}"
+                    title="{{ data.music.title }}"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+              <div class="ret_music_choose--info">
+              <p class="ret_music_choose--info--bold">{{ data.music.title }}</p>
+              <p class="ret_music_choose--info--plain">{{ data.music.artist }}</p>
             </div>
           </li>
         </ul>
     </section>
-
-    
-
     </main>
     <footer class="footer_green">
     <div class="footer_btn_container">
       <a href="/" class="btn return">다시 분석하기</a>
     </div>
       <div class="footer_green--text">
-        <p>OHMYUCHOO</p>
+        <p>OHMUCHOO</p>
         <p>2025. All rights reserved.</p>
       </div>
     </footer>
   </body>
+  <script>
+    // emotion에 따른 글자 색 변경
+    const emotion = document.querySelector(".ret_text_emotion--bold")
+    if(emotion.textContent === '기쁨')
+    emotion.style.color = "#FFD700"
+    else if(emotion.textContent === '슬픔')
+    emotion.style.color = "#0000FF"
+    else if(emotion.textContent === '분노')
+    emotion.style.color = "#FF0000"
+    else if(emotion.textContent === '놀람')
+    emotion.style.color = "#FFA500"
+    else if(emotion.textContent === '공포')
+    emotion.style.color = "#800080"
+    else if(emotion.textContent === '혐오')
+    emotion.style.color = "#008000"
+    else if(emotion.textContent === '중립');
+
+  </script>
+
+  <script>
+    async function likeSong(title) {
+      console.log(title)
+      try {
+        const response = await fetch('http://127.0.0.1:8000/like', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: title })
+        });
+        if (response.ok) {
+          alert('좋아요가 반영되었습니다!');
+        } else {
+          const error = await response.json();
+          alert(`에러 발생: ${error.detail}`);
+        }
+      } catch (err) {
+        console.error('요청 실패:', err);
+        alert('서버와의 통신 중 오류가 발생했습니다.');
+      }
+    }
+
+    async function dislikeSong(title) {
+      console.log(title)
+      try {
+        const response = await fetch('http://127.0.0.1:8000/dislike', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: title })
+        });
+        if (response.ok) {
+          alert('싫어요가 반영되었습니다!');
+        } else {
+          const error = await response.json();
+          alert(`에러 발생: ${error.detail}`);
+        }
+      } catch (err) {
+        console.error('요청 실패:', err);
+        alert('서버와의 통신 중 오류가 발생했습니다.');
+      }
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+      // JavaScript 캡처 기능
+      document.getElementById('capture-btn').addEventListener('click', async () => {
+          const captureArea = document.querySelector('.ret_text_container');
+          
+          // html2canvas로 요소 캡처
+          html2canvas(captureArea).then(canvas => {
+              // 캡처 결과를 Base64로 변환
+              const base64Image = canvas.toDataURL('image/png');
+
+              // 클립보드에 복사
+              navigator.clipboard.writeText(base64Image).then(() => {
+                  alert('이미지가 클립보드에 복사되었습니다.');
+              }).catch(err => {
+                  console.error('Failed to copy image to clipboard:', err);
+              });
+          });
+      });
+  </script>
+
 </html>

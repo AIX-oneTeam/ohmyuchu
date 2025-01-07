@@ -4,12 +4,38 @@ a{
     text-decoration: none;
 }
 
+li{
+    list-style-type: none;
+}
+
 .header_green{
    padding: 20px;
    width: 100%;
    background-color: #D7F9A3;
    position: fixed;
 }
+
+.ret_header_green{
+   padding: 20px;
+   width: 100%;
+   background-color: #D7F9A3;
+   position: absolute;
+   top:0;
+   right:0;
+}
+.ret_logo_green {
+   font-family: 'DNFBitBitv2', sans-serif;
+   font-weight: bold;  
+   font-size: 24px;
+   color: #000000;
+   padding-left: 20px;
+}
+
+/* .ret_text_container::before{
+    content: ' ';
+    display: block;
+    height: 40px;
+} */
 
 
 .footer_green{
@@ -36,22 +62,22 @@ a{
     font-family: 'GangwonEduPowerExtraBoldA', sans-serif;
     max-width: 1048px;
     width:100%;
-    padding: 0 48px;
+    padding: 0 24px;
     margin: 0 auto;
 }
 
-.ret_container::before{
+/* .ret_container::before{
     content: '';
     display: block;
     width: 100%;
     height: 40px;
-}
+} */
 
 .logo_green {
    font-family: 'DNFBitBitv2', sans-serif;
    font-weight: bold;  
    font-size: 24px;
-   color: #ffffff;
+   color: #000000;
    padding-left: 20px;
 }
 
@@ -59,10 +85,18 @@ a{
     font-family: 'GangwonEduPowerExtraBoldA', sans-serif;
     max-width: 1048px;
     width: 100%;
-    padding: 100px 0 0 0;
+    padding: 120px 24px 0 24px;
     display: flex;
     flex-direction: column;
-    gap: 100px;
+    gap: 80px;
+    border-radius: 20px;
+}
+
+.ret_text_emotion_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .ret_text_emotion{
@@ -71,6 +105,14 @@ a{
     border-radius: 25px;
     margin-bottom: 30px;
     text-align: center; 
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+.ret_text_emotion--bold{
+    font-size: 22px;
+    font-weight: bold;
 }
 
 .ret_text_summary{
@@ -100,6 +142,7 @@ a{
     cursor: pointer;
     transition: all 0.2s;
     box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1);
+
 }
 
 .ret_music_container{
@@ -109,8 +152,36 @@ a{
     padding: 100px 0;
     display: flex;
     flex-direction: row;
-    justify-content:left;
+    justify-content:center;
+    align-items: center;
     position: relative;
+}
+
+.ret_music_summary{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.ret_music_choose{
+    width: 100%;
+}
+
+.ret_music_choose--item{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.ret_music_choose{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .button_container{
@@ -140,4 +211,8 @@ a{
     bottom: 70px;
 }
 
+.iframe-container{
+    position: relative;
+    width: 100%;
+}
 
