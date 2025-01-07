@@ -57,8 +57,9 @@ li{
   position: relative;
   font-family: "GangwonEduPowerExtraBoldA", sans-serif;
   width: 100%;
+  height: 100%;
   padding: 20px;
-  margin-top: 10vh;
+  /* margin-top: 10vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -212,11 +213,12 @@ li{
 .sites{
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      /* gap: 10px; */
       align-items: center;
       font-family: 'DNFBitBitv2', sans-serif;
       font-size: 10px;
       color: #000000;
+      margin-top: 10px;
 }
 
 .sites > p {
@@ -231,7 +233,7 @@ li{
 }
 
 .counting{
-  font-size: 18px;
+  font-size: 20px;
   padding-top: 40px; 
   display: flex;
   flex-direction: column;
@@ -239,12 +241,12 @@ li{
 }
 
 .blue{
-    font-size:20px;
+    font-size:25px;
     color: #E26928;
 }
 
 .red{
-    font-size:20px;
+    font-size:25px;
     color: #F5B227;
 }
 
@@ -327,24 +329,36 @@ li{
    
 }
 @media (max-width: 600px){
+  .sites{
+    gap: 10px;
+  }
+
   .sites > p{
-      font-size: 20px;
+      font-size: 18px;
    }
    
    .site-list{
-      font-size: 16px;
+      font-size: 15px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap:10px;
+      gap:5px;
+   }
+
+   .counting > p {
+    font-size: 23px;
+   }
+
+   .counting > p > span{
+    font-size: 26px;
    }
    
    .counting::after {
       content: "";
       display: block;
       width: 100%;
-      height: 80px;
+      height: 50px;
    }
 
 .loadingPage > img{
@@ -359,6 +373,10 @@ li{
     font-size: 12px;
     white-space: nowrap;
     transform: translateX(-40px);
+  }
+
+  .container{
+    margin-top: 10vh;
   }
 }
 
